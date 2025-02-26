@@ -39,15 +39,13 @@ const login = async () => {
 
     console.log(response);
 
-    if (response.message === "Foydalanuvchi allaqachon mavjud") {
-        let response = await $fetch<{ token: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
-                headers: {
-                "Content-Type": "application/json",
-            }
-        });
-        console.log(response);
-        userStore.setToken(response.token);
-    }
+    let response2 = await $fetch<{ token: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
+            headers: {
+            "Content-Type": "application/json",
+        }
+    });
+        console.log(response2);
+        // userStore.setToken(response.token);
 
 }
 
