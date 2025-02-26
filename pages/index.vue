@@ -92,6 +92,7 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
+                {{ miniApp }}
             </div>
         </div>
     </div>
