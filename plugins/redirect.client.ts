@@ -1,3 +1,6 @@
+import { useMiniApp } from 'vue-tg';
+
 export default defineNuxtPlugin((nuxtApp) => {
-    console.log(navigator.userAgent);
+    const miniApp = useMiniApp();
+    console.log('miniApp', miniApp);
 });

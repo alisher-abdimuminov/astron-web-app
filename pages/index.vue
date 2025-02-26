@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { LucideChevronRight, LucideFlaskConical, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun } from 'lucide-vue-next';
-import { useMiniApp } from 'vue-tg'
+import { useMiniApp } from 'vue-tg';
 
 
 const miniApp = useMiniApp();
@@ -8,8 +8,6 @@ const miniApp = useMiniApp();
 const userStore = useUserStore();
 
 const { token, id } = storeToRefs(userStore);
-
-const userAgent = ref("");
 
 
 const user = computed(() => {
@@ -26,6 +24,7 @@ const user = computed(() => {
     }
 });
 
+console.log(miniApp);
 
 const login = async () => {
     // create a new user
@@ -54,7 +53,6 @@ const login = async () => {
 
 onMounted(() => {
     login();
-    userAgent.value = navigator.userAgent;
 });
 
 </script>
@@ -94,9 +92,6 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <ClientOnly>
-                    {{ userAgent }}
-                </ClientOnly>
             </div>
         </div>
     </div>
