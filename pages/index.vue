@@ -7,7 +7,9 @@ const miniApp = useMiniApp();
 
 const userStore = useUserStore();
 
-const { token, id } = storeToRefs(userStore)
+const { token, id } = storeToRefs(userStore);
+
+const userAgent = ref("");
 
 
 const user = computed(() => {
@@ -52,6 +54,7 @@ const login = async () => {
 
 onMounted(() => {
     login();
+    userAgent.value = navigator.userAgent;
 });
 
 </script>
@@ -91,6 +94,9 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
+                <ClientOnly>
+                    {{ userAgent }}
+                </ClientOnly>
             </div>
         </div>
     </div>
