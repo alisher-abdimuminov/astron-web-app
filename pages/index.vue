@@ -45,10 +45,10 @@ const login = async () => {
                 "Content-Type": "application/json",
             }
         });
+        console.log(response);
         userStore.setToken(response.token);
     }
 
-    console.log(response);
 }
 
 
