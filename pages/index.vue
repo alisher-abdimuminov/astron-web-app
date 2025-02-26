@@ -44,8 +44,8 @@ const login = async () => {
             "Content-Type": "application/json",
         }
     });
-        console.log(response2);
-        // userStore.setToken(response.token);
+    console.log(response2);
+    userStore.setToken(response2.token);
 
 }
 
