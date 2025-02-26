@@ -32,12 +32,23 @@ const login = async () => {
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
         }),
+        headers: {
+            "Content-Type": "application/json",
+        }
     });
 
+    console.log(response);
+
     if (response.message === "Foydalanuvchi allaqachon mavjud") {
-        let response = await $fetch<{ token: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`);
+        let response = await $fetch<{ token: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
+                headers: {
+                "Content-Type": "application/json",
+            }
+        });
         userStore.setToken(response.token);
     }
+
+    console.log(response);
 }
 
 
