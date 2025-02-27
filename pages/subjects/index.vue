@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
 const router = useRouter();
 
 
@@ -7,13 +7,17 @@ const subjectsStore = useSubjectsStore();
 
 const { subjects } = storeToRefs(subjectsStore);
 
+
+definePageMeta({
+    middleware: ["is-telegram", "get-subjects"],
+});
 </script>
 
 <template>
     <div class="h-screen w-full">
         <div class="flex items-center gap-2 h-[3rem] p-2 border-b">
             <div class="border rounded-full p-1" @click="router.back()">
-                <Icon class="text-xl" icon="lucide:chevron-left" />
+                <LucideChevronLeft />
             </div>
             <p>Fanlar</p>
         </div>
