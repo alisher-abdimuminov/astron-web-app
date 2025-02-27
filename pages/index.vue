@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideFlaskConical, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun } from 'lucide-vue-next';
+import { LucideChevronRight, LucideFlaskConical, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 
 
@@ -51,6 +51,15 @@ const login = async () => {
 }
 
 
+definePageMeta({
+    middleware: ["is-telegram", "get-subjects"],
+});
+
+useSeoMeta({
+    title: "Astron",
+});
+
+
 onMounted(() => {
     login();
 });
@@ -65,7 +74,7 @@ onMounted(() => {
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">
-                <div class="flex justify-between p-3">
+                <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects' })">
                     <div class="flex items-center gap-2">
                         <LucideMessageCircleQuestion :size="20" />
                         <p>Savollar</p>
@@ -85,15 +94,24 @@ onMounted(() => {
                 </div>
                 <div class="flex justify-between p-3">
                     <div class="flex items-center gap-2">
-                        <LucideWallet :size="20" />
-                        <p>Testlar</p>
+                        <LucideFile :size="20" />
+                        <p>Fayllar</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
                     </div>
                 </div>
-                {{ miniApp }}
+                <div class="flex justify-between p-3">
+                    <div class="flex items-center gap-2">
+                        <LucideWallet :size="20" />
+                        <p>Balansni to'ldirish</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <LucideChevronRight />
+                    </div>
+                </div>
             </div>
+            {{ miniApp }}
         </div>
     </div>
 </template>
