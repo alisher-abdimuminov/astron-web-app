@@ -58,7 +58,7 @@ const getFiles = async () => {
 }
 
 const getPurchasedFiles = async () => {
-    let response = await $fetch<{ success: boolean, data: IPurchasedFile[] }>(`https://astrontest.uz/mobile-api/api/uz/purchased-files/?token=${token}`);
+    let response = await $fetch<{ success: boolean, data: IPurchasedFile[] }>(`https://astrontest.uz/mobile-api/api/uz/purchased-files/?token=${token.value}`);
 
     if (response.success) {
         purchasedFiles.value = response.data;
@@ -71,7 +71,7 @@ const buyFile = async (file: IFile) => {
         method: "POST",
         body: JSON.stringify({
             "file_id": file.file_id,
-            "token": token,
+            "token": token.value,
         })
     });
 
@@ -148,7 +148,7 @@ onMounted(() => {
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
-                                <Button size="sm" variant="outline"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                <Button v-if="parseFloat(balance) < parseFloat(file.file_price)" size="sm" variant="outline"><LucideShoppingCart /> {{ file.file_price }}</Button>
                             </div>
                         </div>
                     </div>
