@@ -2,11 +2,11 @@
 import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
 
 
-interface IClass {
-    classess_id: string
-    subject_id: string
-    classes_name: string
-    classes_status: string
+interface IMavzu {
+    mavzu_id: string
+    fan_id: string
+    mavzu_nomi: string
+    mavzu_status: string
 }
 
 
@@ -20,21 +20,22 @@ const { token } = storeToRefs(userStore);
 const { subjects } = storeToRefs(subjectsStore);
 
 const isLoading = ref(true);
-const classes = ref<IClass[]>([]);
+const themes = ref<IMavzu[]>([]);
 
 
 
 const getClassess = async () => {
     isLoading.value = true;
-    let response = await $fetch<IClass[]>("https://astrontest.uz/mobile-api/api/uz/classesuz?lang=uz", {
+    let response = await $fetch<IMavzu[]>("https://astrontest.uz/mobile-api/api/uz/testthemeuz?lang=uz", {
         method: "POST",
         body: JSON.stringify({
             "token": token.value,
             "subjectid": route.params.subjectid,
+            "classesid": route.params.classid
         })
     });
 
-    classes.value = response;
+    themes.value = response;
     isLoading.value = true;
 }
 
@@ -55,14 +56,14 @@ onMounted(() => {
             <div class="border rounded-full p-1" @click="router.back()">
                 <LucideChevronLeft />
             </div>
-            <p>Sinflar</p>
+            <p>Mavzular</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
-            <p>Sinflar</p>
+            <p>Mavzular</p>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="klass in classes" class="flex justify-between p-2" @click="navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classess_id } })">
+                <div v-for="theme in themes" class="flex justify-between p-2" @click="">
                     <div class="flex items-center gap-2">
-                        <p class="w-3/4">{{ klass.classes_name }}</p>
+                        <p class="w-3/4 break-all">{{ theme.mavzu_nomi }}</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
