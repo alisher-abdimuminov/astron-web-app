@@ -37,12 +37,8 @@ const login = async () => {
             "Content-Type": "application/json",
         }
     });
-
-    console.log(response);
-
     userStore.setToken(response.token);
     userStore.setBalance(response.balance);
-
 }
 
 
@@ -66,7 +62,7 @@ onMounted(() => {
         <div class="h-[12rem] p-5">
             <p>Salom {{ user }} {{ id }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
-            <p>ID: {{ id }}</p>
+            <p>ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
             <p>Balans: {{ balance }}</p>
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
