@@ -20,11 +20,13 @@ const { token } = storeToRefs(userStore);
 const { subjects } = storeToRefs(subjectsStore);
 
 const isLoading = ref(true);
+const classes = ref<IClass[]>([]);
 
 
 
 const getClassess = async () => {
-    let response = await $fetch("https://astrontest.uz/mobile-api/api/uz/classesuz?lang=uz", {
+    isLoading.value = true;
+    let response = await $fetch<IClass[]>("https://astrontest.uz/mobile-api/api/uz/classesuz?lang=uz", {
         method: "POST",
         body: JSON.stringify({
             "token": token.value,
@@ -32,7 +34,8 @@ const getClassess = async () => {
         })
     });
 
-    
+    classes.value = response;
+    isLoading.value = true;
 }
 
 
@@ -41,6 +44,7 @@ definePageMeta({
 });
 
 onMounted(() => {
+    getClassess();
     isLoading.value = false;
 });
 </script>
@@ -51,14 +55,14 @@ onMounted(() => {
             <div class="border rounded-full p-1" @click="router.back()">
                 <LucideChevronLeft />
             </div>
-            <p>Fanlar</p>
+            <p>Sinflar</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
-            <p>Fanlar</p>
+            <p>Sinflar</p>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="subject in subjects" class="flex justify-between p-2" @click="">
+                <div v-for="klass in classes" class="flex justify-between p-2" @click="">
                     <div class="flex items-center gap-2">
-                        <p class="w-3/4">{{ subject.subject_name }}</p>
+                        <p class="w-3/4">{{ klass.classes_name }}</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
