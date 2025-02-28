@@ -41,7 +41,7 @@ const getClassess = async () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects"],
 });
 
 onMounted(() => {

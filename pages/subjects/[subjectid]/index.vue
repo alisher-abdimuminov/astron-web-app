@@ -3,7 +3,7 @@ import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
 
 
 interface IClass {
-    classess_id: string
+    classes_id: string
     subject_id: string
     classes_name: string
     classes_status: string
@@ -40,7 +40,7 @@ const getClassess = async () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects"],
 });
 
 onMounted(() => {
@@ -60,7 +60,7 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <p>Sinflar</p>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="klass in classes" class="flex justify-between p-2" @click="navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classess_id } })">
+                <div v-for="klass in classes" class="flex justify-between p-2" @click="navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query })">
                     <div class="flex items-center gap-2">
                         <p class="w-3/4">{{ klass.classes_name }}</p>
                     </div>
