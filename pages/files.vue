@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMiniApp } from 'vue-tg';
-import { LucideChevronLeft, LucideChevronRight, LucideDownload, LucideFile, LucideFiles, LucideShoppingCart } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight, LucideDownload, LucideFile, LucideFiles, LucideLoader, LucideShoppingCart } from 'lucide-vue-next';
 
 
 interface IFile {
@@ -32,6 +32,7 @@ const { token, balance } = storeToRefs(userStore);
 const files = ref<IFile[]>([]);
 const purchasedFiles = ref<IPurchasedFile[]>([]);
 const isLoading = ref(true);
+const open = ref(false);
 
 
 const login = async () => {
@@ -75,6 +76,10 @@ const buyFile = async (file: IFile) => {
             "token": token.value,
         })
     });
+
+    if (response) {
+        open.value = false;
+    }
 
     login();
     getFiles();
@@ -134,9 +139,9 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
-                                <Dialog>
+                                <Dialog v-model:open="open">
                                     <DialogTrigger v-if="parseFloat(balance) > parseFloat(file.file_price)">
-                                        <Button size="sm"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                        <Button size="sm" class="bg-green-500"><LucideShoppingCart /> {{ file.file_price }}</Button>
                                     </DialogTrigger>
                                     <DialogContent class="w-3/4">
                                         <DialogHeader>
@@ -145,11 +150,22 @@ onMounted(() => {
                                         </DialogHeader>
                                         <p>{{ file.file_name }} - ni sotib olasizmi?</p>
                                         <DialogFooter class="gap-2">
-                                            <Button @click="buyFile(file)">Ha</Button>
+                                            <Button :disabled="isLoading" @click="buyFile(file)"><LucideLoader v-if="isLoading" class="animate-spin" /> Ha</Button>
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
-                                <Button v-if="parseFloat(balance) < parseFloat(file.file_price)" size="sm" variant="outline"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                <Dialog>
+                                    <DialogTrigger>
+                                        <Button v-if="parseFloat(balance) < parseFloat(file.file_price)" size="sm" variant="destructive"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                    </DialogTrigger>
+                                    <DialogContent class="w-3/4">
+                                        <DialogHeader>
+                                            <DialogTitle>Ogohlantirish</DialogTitle>
+                                            <DialogDescription>Hisobingizda mablag' yetarli emas.</DialogDescription>
+                                        </DialogHeader>
+                                        <p>{{ file.file_name }} - ni sotib olish uchun hisobingizni to'ldiring.</p>
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         </div>
                     </div>
