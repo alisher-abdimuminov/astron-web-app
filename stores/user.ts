@@ -2,9 +2,10 @@ import { defineStore } from 'pinia'
 
 
 export const useUserStore = defineStore("user", {
-    state: (): { token: string, id: string } => ({ 
+    state: (): { token: string, id: string, balance: string } => ({ 
         token: '',
-        id: ''
+        id: '',
+        balance: ''
     }),
     actions: {
         setToken(token: string) {
@@ -12,6 +13,9 @@ export const useUserStore = defineStore("user", {
         },
         setId(id: string) {
             this.id = id
+        },
+        setBalance(value: string) {
+            this.balance = value;
         }
     }
 });

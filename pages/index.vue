@@ -7,7 +7,7 @@ const miniApp = useMiniApp();
 
 const userStore = useUserStore();
 
-const { token, id } = storeToRefs(userStore);
+const { token, id, balance } = storeToRefs(userStore);
 
 
 const user = computed(() => {
@@ -28,7 +28,7 @@ console.log(miniApp);
 
 const login = async () => {
     // create a new user
-    let response = await $fetch<{ message: string }>("https://astrontest.uz/mobile-api/api/uz/create-user/", {
+    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -40,13 +40,8 @@ const login = async () => {
 
     console.log(response);
 
-    let response2 = await $fetch<{ token: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
-            headers: {
-            "Content-Type": "application/json",
-        }
-    });
-    console.log(response2);
-    userStore.setToken(response2.token);
+    userStore.setToken(response.token);
+    userStore.setBalance(response.balance);
 
 }
 
@@ -69,8 +64,10 @@ onMounted(() => {
 <template>
     <div class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div class="h-[12rem] p-5">
-            <p>Salom {{ user }} {{ token }} {{ id }}</p>
+            <p>Salom {{ user }} {{ id }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
+            <p>ID: {{ id }}</p>
+            <p>Balans: {{ balance }}</p>
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">

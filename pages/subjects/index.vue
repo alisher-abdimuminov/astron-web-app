@@ -1,15 +1,22 @@
 <script setup lang="ts">
 import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
-const router = useRouter();
 
+
+const router = useRouter();
 
 const subjectsStore = useSubjectsStore();
 
 const { subjects } = storeToRefs(subjectsStore);
 
+const isLoading = ref(true);
 
 definePageMeta({
     middleware: ["is-telegram", "get-subjects"],
+});
+
+
+onMounted(() => {
+    isLoading.value = false;
 });
 </script>
 
@@ -26,7 +33,7 @@ definePageMeta({
             <div class="bg-accent/30 rounded-md divide-y">
                 <div v-for="subject in subjects" class="flex justify-between p-2" @click="">
                     <div class="flex items-center gap-2">
-                        <p class="truncate">{{ subject.subject_name }}</p>
+                        <p class="w-3/4">{{ subject.subject_name }}</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
