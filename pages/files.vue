@@ -134,7 +134,7 @@ onMounted(() => {
                                     <LucideFile />
                                 </div>
                                 <div class="flex flex-col">
-                                    <p>{{ file.file_name }}</p>
+                                    <p class="break-all">{{ file.file_name }}</p>
                                     <p class="text-muted-foreground text-xs break-all">{{ file.description }}asdddddddddddddddddddddddddddddddddddddddddddddddddd</p>
                                 </div>
                             </div>
