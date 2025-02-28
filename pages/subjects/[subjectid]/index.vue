@@ -2,18 +2,43 @@
 import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
 
 
+interface IClass {
+    classess_id: string
+    subject_id: string
+    classes_name: string
+    classes_status: string
+}
+
+
+const route = useRoute();
 const router = useRouter();
 
+const userStore = useUserStore();
 const subjectsStore = useSubjectsStore();
 
+const { token } = storeToRefs(userStore);
 const { subjects } = storeToRefs(subjectsStore);
 
 const isLoading = ref(true);
 
+
+
+const getClassess = async () => {
+    let response = await $fetch("https://astrontest.uz/mobile-api/api/uz/classesuz?lang=uz", {
+        method: "POST",
+        body: JSON.stringify({
+            "token": token.value,
+            "subjectid": route.params.subjectid,
+        })
+    });
+
+    
+}
+
+
 definePageMeta({
     middleware: ["is-telegram", "get-subjects"],
 });
-
 
 onMounted(() => {
     isLoading.value = false;
