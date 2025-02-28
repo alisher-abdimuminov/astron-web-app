@@ -89,7 +89,7 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div class="flex justify-between p-3">
+                <div class="flex justify-between p-3" @click="navigateTo({ name: 'files' })">
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
                         <p>Fayllar</p>
@@ -108,7 +108,6 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            {{ miniApp }}
         </div>
     </div>
 </template>
