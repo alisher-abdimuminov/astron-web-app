@@ -63,7 +63,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="!!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
+    <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div class="h-[12rem] p-5">
             <p>Salom {{ user }} {{ id }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
