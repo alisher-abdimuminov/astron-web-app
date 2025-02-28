@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideFlaskConical, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile } from 'lucide-vue-next';
+import { LucideChevronRight, LucideFlaskConical, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 
 
@@ -8,6 +8,8 @@ const miniApp = useMiniApp();
 const userStore = useUserStore();
 
 const { token, id, balance } = storeToRefs(userStore);
+
+const isLoading = ref(true);
 
 
 const user = computed(() => {
@@ -28,6 +30,7 @@ console.log(miniApp);
 
 const login = async () => {
     // create a new user
+    isLoading.value = true;
     let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
@@ -39,6 +42,7 @@ const login = async () => {
     });
     userStore.setToken(response.token);
     userStore.setBalance(response.balance);
+    isLoading.value = false;
 }
 
 
@@ -53,12 +57,13 @@ useSeoMeta({
 
 onMounted(() => {
     login();
+    isLoading.value = false;
 });
 
 </script>
 
 <template>
-    <div class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
+    <div v-if="!!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div class="h-[12rem] p-5">
             <p>Salom {{ user }} {{ id }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
@@ -105,5 +110,8 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+    </div>
+    <div v-else class="h-screen w-full flex items-center justify-center">
+        <LucideLoader class="animate-spin" />
     </div>
 </template>

@@ -15,6 +15,7 @@ interface IPurchasedFile {
     file_id: string
     file_name: string
     file_price: string
+    file_path: string
     description: string
     created_at: string
 }
@@ -166,7 +167,7 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
-                                <Button size="sm"><LucideDownload /> Yuklab olish</Button>
+                                <Button @click="navigateTo('https://astrontest.uz/mypage/' + file.file_path, { external: true, open: { target: '_blank' } })" size="sm"><LucideDownload /> Yuklab olish</Button>
                             </div>
                         </div>
                     </div>
