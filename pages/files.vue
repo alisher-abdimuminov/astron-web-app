@@ -96,13 +96,14 @@ const downloadFile = async (file: IPurchasedFile) => {
     // console.log(blob);
     const url = window.URL.createObjectURL(await response);
     const a = document.createElement("a");
+    console.log(url);
     a.href = url;
     a.href = url;
     a.download = `${file.file_name}.docx`
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+    // document.body.removeChild(a);
+    // window.URL.revokeObjectURL(url);
 }
 
 
