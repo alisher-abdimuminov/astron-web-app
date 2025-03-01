@@ -51,7 +51,7 @@ const login = async () => {
 }
 
 const getFiles = async () => {
-    let response = await $fetch<{ success: boolean, data: IFile[] }>("https://astrontest.uz/mobile-api/api/uz/files/");
+    let response = await $fetch<{ success: boolean, data: IFile[] }>(`https://astrontest.uz/mobile-api/api/uz/files/?token=${token.value}`);
 
     if (response.success) {
         files.value = response.data;
@@ -85,6 +85,25 @@ const buyFile = async (file: IFile) => {
     getFiles();
     getPurchasedFiles();
     isLoading.value = false;
+}
+
+const downloadFile = async (file: IPurchasedFile) => {
+    let response = await $fetch<Blob>(`https://astrontest.uz/mypage/get-file.php?token=${token.value}&file_id=${file.file_id}`, {
+        method: "GET",
+    });
+
+    // const blob = await response;
+    // console.log(blob);
+    const url = window.URL.createObjectURL(await response);
+    const a = document.createElement("a");
+    a.href = url;
+    a.href = url;
+    a.download = `${file.file_name}.docx`
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
 }
 
 
@@ -139,9 +158,9 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
-                                <Dialog v-model:open="open">
+                                <Dialog>
                                     <DialogTrigger v-if="parseFloat(balance) > parseFloat(file.file_price)">
-                                        <Button size="sm" class="bg-green-500"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                        <Button size="sm" class="bg-green-500"><LucideShoppingCart /> {{ file.file_price }} {{ file.file_id }}</Button>
                                     </DialogTrigger>
                                     <DialogContent class="w-3/4">
                                         <DialogHeader>
@@ -150,7 +169,9 @@ onMounted(() => {
                                         </DialogHeader>
                                         <p>{{ file.file_name }} - ni sotib olasizmi?</p>
                                         <DialogFooter class="gap-2">
-                                            <Button :disabled="isLoading" @click="buyFile(file)"><LucideLoader v-if="isLoading" class="animate-spin" /> Ha</Button>
+                                            <DialogClose>
+                                                <Button :disabled="isLoading" @click="buyFile(file)"><LucideLoader v-if="isLoading" class="animate-spin" /> Ha</Button>
+                                            </DialogClose>
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
@@ -183,7 +204,7 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
-                                <Button @click="navigateTo('https://astrontest.uz/mypage/' + file.file_path, { external: true, open: { target: '_blank' } })" size="sm"><LucideDownload /> Yuklab olish</Button>
+                                <Button @click="downloadFile(file)" size="sm"><LucideDownload /> Yuklab olish</Button>
                             </div>
                         </div>
                     </div>

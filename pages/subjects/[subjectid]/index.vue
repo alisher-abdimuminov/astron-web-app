@@ -51,7 +51,7 @@ onMounted(() => {
 
 <template>
     <div class="h-screen w-full">
-        <div class="flex items-center gap-2 h-[3rem] p-2 border-b">
+        <div class="sticky top-0 z-50 bg-background flex items-center gap-2 h-[3rem] p-2 border-b">
             <div class="border rounded-full p-1" @click="router.back()">
                 <LucideChevronLeft />
             </div>
