@@ -3,9 +3,9 @@ import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore("user", {
     state: (): { token: string, id: string | number, balance: string } => ({ 
-        token: '',
+        token: '070d763b25160f7e5c94760e2ed319c48b0d7820b16984d9ad866255307dc99aae5016a88966452bb3846942cd4505523225',
         id: '',
-        balance: ''
+        balance: '10000'
     }),
     actions: {
         setToken(token: string) {

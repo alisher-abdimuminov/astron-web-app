@@ -29,17 +29,18 @@ onMounted(() => {
             <p>Fanlar</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
-            <p>Fanlar</p>
+            <br>
             <div class="bg-accent/30 rounded-md divide-y">
                 <div v-for="subject in subjects" class="flex justify-between p-2" @click="navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query })">
                     <div class="flex items-center gap-2">
-                        <p class="w-3/4">{{ subject.subject_name }}</p>
+                        <p class="break-all">{{ subject.subject_name }}</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
                     </div>
                 </div>
             </div>
+            <br>
         </div>
     </div>
 </template>

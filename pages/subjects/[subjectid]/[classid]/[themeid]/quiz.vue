@@ -46,7 +46,7 @@ definePageMeta({
 });
 
 onMounted(() => {
-    getClassess();
+    // getClassess();
     isLoading.value = false;
 });
 </script>
@@ -57,21 +57,12 @@ onMounted(() => {
             <div class="border rounded-full p-1" @click="router.back()">
                 <LucideChevronLeft />
             </div>
-            <p>Mavzular</p>
+            <p>Savollar</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 px-5">
             <ScrollArea class="h-full">
                 <br>
-                <div class="bg-accent/30 rounded-md divide-y">
-                    <div v-for="theme in themes" class="flex justify-between p-2" @click="() => { $route.query.type === 'quiz' ? navigateTo({ name: 'subjects-subjectid-classid-themeid-quiz', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) : navigateTo({ name: 'subjects-subjectid-classid-themeid-test', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) }">
-                        <div class="flex items-center gap-2">
-                            <p class="break-all">{{ theme.mavzu_nomi }}</p>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <LucideChevronRight />
-                        </div>
-                    </div>
-                </div>
+                Savollar
                 <br>
             </ScrollArea>
         </div>

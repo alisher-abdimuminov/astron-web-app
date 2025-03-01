@@ -72,7 +72,7 @@ onMounted(() => {
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">
-                <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects' })">
+                <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'quiz' } })">
                     <div class="flex items-center gap-2">
                         <LucideMessageCircleQuestion :size="20" />
                         <p>Savollar</p>
@@ -81,7 +81,7 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div class="flex justify-between p-3">
+                <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'test' } })">
                     <div class="flex items-center gap-2">
                         <LucideFlaskConical :size="20" />
                         <p>Testlar</p>
@@ -93,7 +93,7 @@ onMounted(() => {
                 <div class="flex justify-between p-3" @click="navigateTo({ name: 'files' })">
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
-                        <p>Fayllar</p>
+                        <p>Fayl market</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
