@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMiniApp } from 'vue-tg';
-import { LucideChevronLeft, LucideChevronRight, LucideDownload, LucideFile, LucideFiles, LucideLoader, LucideShoppingCart } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight, LucideDownload, LucideFile, LucideFiles, LucideLoader, LucideShoppingCart, Target } from 'lucide-vue-next';
 
 
 interface IFile {
@@ -204,7 +204,7 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
-                                <Button @click="downloadFile(file)" size="sm"><LucideDownload /> Yuklab olish</Button>
+                                <Button @click="navigateTo('https://astrontest.uz/mypage/' + file.file_path, { external: true, open: { target: '_blank' } } )" size="sm"><LucideDownload /> Yuklab olish</Button>
                             </div>
                         </div>
                     </div>
