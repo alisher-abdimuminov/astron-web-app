@@ -101,7 +101,6 @@ const downloadFile = async (file: IPurchasedFile) => {
     a.download = `${file.file_name}.docx`
     document.body.appendChild(a);
     a.click();
-    a.remove();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
 }
