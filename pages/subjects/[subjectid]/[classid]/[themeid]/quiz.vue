@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight, LucideEye, LucideEyeClosed } from 'lucide-vue-next';
 
 
-interface IMavzu {
-    mavzu_id: string
+interface IQuiz {
+    course_id: string
     fan_id: string
     sinf_id: string
-    mavzu_nomi: string
-    mavzu_status: string
+    mavzu_id: string
+    course_savol: string
+    course_javob: string
 }
 
 
@@ -18,27 +19,34 @@ const userStore = useUserStore();
 const subjectsStore = useSubjectsStore();
 
 const { token } = storeToRefs(userStore);
-const { subjects } = storeToRefs(subjectsStore);
 
 const isLoading = ref(true);
-const themes = ref<IMavzu[]>([]);
+const quizzes = ref<IQuiz[]>([]);
+const index = ref(0);
+const open = ref(false);
 
 
 
-const getClassess = async () => {
+const getQuizzes = async () => {
     isLoading.value = true;
-    let response = await $fetch<IMavzu[]>("https://astrontest.uz/mobile-api/api/uz/testthemeuz?lang=uz", {
+    let response = await $fetch<string>("https://astrontest.uz/mobile-api/api/uz/coursesuz/", {
         method: "POST",
         body: JSON.stringify({
             "token": token.value,
             "subjectid": route.params.subjectid,
-            "classesid": route.params.classid
+            "classid": route.params.classid,
+            "mavzuid": route.params.themeid,
         })
     });
 
-    themes.value = response;
+    quizzes.value = JSON.parse(response);
     isLoading.value = true;
 }
+
+
+const getQuiz = computed(() => (index: number = 0) => {
+    return quizzes.value[index];
+});
 
 
 definePageMeta({
@@ -46,7 +54,7 @@ definePageMeta({
 });
 
 onMounted(() => {
-    // getClassess();
+    getQuizzes();
     isLoading.value = false;
 });
 </script>
@@ -62,7 +70,30 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 px-5">
             <ScrollArea class="h-full">
                 <br>
-                Savollar
+                <div class="bg-accent/30 rounded-md p-2">
+                    <Collapsible v-if="getQuiz(index)" v-model:open="open">
+                        <CollapsibleTrigger>
+                            <div class="flex items-center gap-2 text-start text-lg">
+                                <p>{{ getQuiz(index).course_savol }}</p>
+                                <div>
+                                    <LucideEye v-if="!open" :size="20" />
+                                    <LucideEyeClosed v-else :size="20" />
+                                </div>
+                            </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                            <Separator />
+                            <p class="text-green-500">{{ getQuiz(index).course_javob }}</p>
+                        </CollapsibleContent>
+                    </Collapsible>
+                </div>
+                <br>
+                <div class="flex justify-between items-center">
+                    <Button v-if="getQuiz(index-1)" @click="() => { index--; open = false }" size="icon" variant="outline" class="rounded-full"><LucideChevronLeft /></Button>
+                    <div v-else></div>
+                    <Button v-if="getQuiz(index+1)" @click="() => { index++; open = false }" size="icon" variant="outline" class="rounded-full"><LucideChevronRight /></Button>
+                    <div v-else></div>
+                </div>
                 <br>
             </ScrollArea>
         </div>
