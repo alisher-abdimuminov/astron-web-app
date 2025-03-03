@@ -58,11 +58,6 @@ onMounted(() => {
     console.log(miniApp.initDataUnsafe);
     console.log(miniApp.isActive);
     login();
-    document.addEventListener('DOMContentLoaded', function () {
-        const user = Telegram.WebApp.initDataUnsafe.user;
-
-        console.log("user", user);
-    });
     isLoading.value = false;
 });
 
