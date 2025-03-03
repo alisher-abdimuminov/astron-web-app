@@ -55,6 +55,12 @@ useSeoMeta({
 
 
 onMounted(() => {
+    miniApp.ready();
+    if (miniApp.onActive) {
+        miniApp.onActive(() => {
+            console.log(miniApp.initDataUnsafe);
+        })
+    }
     console.log(miniApp.initDataUnsafe);
     console.log(miniApp.isActive);
     login();
