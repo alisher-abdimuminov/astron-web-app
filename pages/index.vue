@@ -5,33 +5,23 @@ import { useMiniApp } from 'vue-tg';
 
 const miniApp = useMiniApp();
 
-const userStore = useUserStore();
-
-const { token, id, balance } = storeToRefs(userStore);
+const id = useCookie("id");
+const token = useCookie("token");
+const balance = useCookie("balance");
 
 const isLoading = ref(true);
 
 miniApp.ready();
 
-const user = computed(() => {
-    if (miniApp.initDataUnsafe.user) {
-        if (miniApp.initDataUnsafe.user.first_name) {
-            return miniApp.initDataUnsafe.user.first_name;
-        } else if (miniApp.initDataUnsafe.user.username) {
-            return miniApp.initDataUnsafe.user.username;
-        } else {
-            return miniApp.initDataUnsafe.user.id;
-        }
-    } else {
-        return "User";
-    }
-});
+if (miniApp.initDataUnsafe.user) {
+    id.value = miniApp.initDataUnsafe.user.id.toString();
+}
 
 
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${id.value}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -40,8 +30,8 @@ const login = async () => {
             "Content-Type": "application/json",
         }
     });
-    userStore.setToken(response.token);
-    userStore.setBalance(response.balance);
+    token.value = response.token;
+    balance.value = response.balance;
     isLoading.value = false;
 }
 
@@ -68,7 +58,7 @@ onMounted(() => {
             <LucideRefreshCw @click="login" />
         </div>
         <div class="h-[12rem] p-5">
-            <p>Salom {{ user }}</p>
+            <p>Salom</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
             <p>ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
             <p>Balans: {{ balance }}</p>
