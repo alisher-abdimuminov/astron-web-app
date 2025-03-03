@@ -56,7 +56,7 @@ useSeoMeta({
 
 
 onMounted(() => {
-    if (miniApp.initData === "quiery_id") {
+    if (miniApp.initData === "query_id") {
         window.location.reload();
     }
     console.log(miniApp);
