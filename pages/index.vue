@@ -11,6 +11,7 @@ const { token, id, balance } = storeToRefs(userStore);
 
 const isLoading = ref(true);
 
+miniApp.ready();
 
 const user = computed(() => {
     if (miniApp.initDataUnsafe.user) {
@@ -55,7 +56,6 @@ useSeoMeta({
 
 
 onMounted(() => {
-    miniApp.ready();
     if (miniApp.onActive) {
         console.log("active");
         miniApp.onActive(() => {
