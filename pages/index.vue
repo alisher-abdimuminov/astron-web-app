@@ -63,7 +63,7 @@ onMounted(() => {
             console.log(miniApp.initDataUnsafe);
         })
     }
-    console.log(miniApp.initDataUnsafe);
+    console.log(miniApp);
     console.log(miniApp.isReady.value);
     login();
     isLoading.value = false;
