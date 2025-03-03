@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideFlaskConical, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader } from 'lucide-vue-next';
+import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 
 
@@ -30,7 +30,7 @@ const user = computed(() => {
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${await miniApp.initDataUnsafe.user?.id}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -55,6 +55,8 @@ useSeoMeta({
 
 
 onMounted(() => {
+    console.log(miniApp.initDataUnsafe);
+    console.log(miniApp.isActive);
     login();
     isLoading.value = false;
 });
@@ -82,7 +84,7 @@ onMounted(() => {
                 </div>
                 <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'test' } })">
                     <div class="flex items-center gap-2">
-                        <LucideFlaskConical :size="20" />
+                        <LucideListCheck :size="20" />
                         <p>Testlar</p>
                     </div>
                     <div class="flex items-center justify-center">

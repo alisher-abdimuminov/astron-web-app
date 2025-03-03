@@ -3,6 +3,8 @@
 
 <template>
     <div>
-        <slot />
+        <ClientOnly>
+            <slot />
+        </ClientOnly>
     </div>
 </template>
