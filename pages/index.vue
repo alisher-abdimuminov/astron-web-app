@@ -57,12 +57,14 @@ useSeoMeta({
 onMounted(() => {
     miniApp.ready();
     if (miniApp.onActive) {
+        console.log("active");
         miniApp.onActive(() => {
+            console.log("andactive");
             console.log(miniApp.initDataUnsafe);
         })
     }
     console.log(miniApp.initDataUnsafe);
-    console.log(miniApp.isActive);
+    console.log(miniApp.isReady.value);
     login();
     isLoading.value = false;
 });
