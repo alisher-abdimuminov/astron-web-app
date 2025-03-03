@@ -30,7 +30,7 @@ const user = computed(() => {
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${await miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -56,9 +56,6 @@ useSeoMeta({
 
 onMounted(() => {
     login();
-    if (miniApp.isReady.value === false) {
-        window.location.reload();
-    }
     isLoading.value = false;
 });
 
