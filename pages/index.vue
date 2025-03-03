@@ -5,23 +5,19 @@ import { useMiniApp } from 'vue-tg';
 
 const miniApp = useMiniApp();
 
-const id = useCookie("id");
-const token = useCookie("token");
-const balance = useCookie("balance");
+let id: string | null = "";
+let token: string | null = "";
+let balance: string | null = "";
 
 const isLoading = ref(true);
 
 miniApp.ready();
 
-if (miniApp.initDataUnsafe.user) {
-    id.value = miniApp.initDataUnsafe.user.id.toString();
-}
-
 
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${id.value}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -30,8 +26,8 @@ const login = async () => {
             "Content-Type": "application/json",
         }
     });
-    token.value = response.token;
-    balance.value = response.balance;
+    localStorage.setItem("token", response.token);
+    localStorage.setItem("balance", response.balance);
     isLoading.value = false;
 }
 
@@ -46,6 +42,12 @@ useSeoMeta({
 
 
 onMounted(() => {
+    id = localStorage.getItem("id");
+    token = localStorage.getItem("token");
+    balance = localStorage.getItem("balance");
+    if (miniApp.initDataUnsafe.user) {
+        localStorage.setItem("id", miniApp.initDataUnsafe.user.id.toString());
+    }
     login();
     isLoading.value = false;
 });
