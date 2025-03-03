@@ -5,6 +5,7 @@
 <template>
     <div>
         <NuxtRouteAnnouncer />
+        <NuxtLoadingIndicator />
         <NuxtLayout>
             <ClientOnly>
                 <NuxtPage />

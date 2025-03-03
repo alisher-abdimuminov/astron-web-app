@@ -26,7 +26,6 @@ const user = computed(() => {
     }
 });
 
-console.log(miniApp);
 
 const login = async () => {
     // create a new user
@@ -57,6 +56,9 @@ useSeoMeta({
 
 onMounted(() => {
     login();
+    if (miniApp.isReady.value === false) {
+        window.location.reload();
+    }
     isLoading.value = false;
 });
 
