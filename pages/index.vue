@@ -64,7 +64,7 @@ onMounted(() => {
 
 <template>
     <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
-        <div class="flex justify-end">
+        <div class="flex justify-end p-5">
             <LucideRefreshCw @click="login" />
         </div>
         <div class="h-[12rem] p-5">
