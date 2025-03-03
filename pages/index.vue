@@ -5,19 +5,33 @@ import { useMiniApp } from 'vue-tg';
 
 const miniApp = useMiniApp();
 
-let id: string | null = "";
-let token: string | null = "";
-let balance: string | null = "";
+const userStore = useUserStore();
+
+const { token, id, balance } = storeToRefs(userStore);
 
 const isLoading = ref(true);
 
 miniApp.ready();
 
+const user = computed(() => {
+    if (miniApp.initDataUnsafe.user) {
+        if (miniApp.initDataUnsafe.user.first_name) {
+            return miniApp.initDataUnsafe.user.first_name;
+        } else if (miniApp.initDataUnsafe.user.username) {
+            return miniApp.initDataUnsafe.user.username;
+        } else {
+            return miniApp.initDataUnsafe.user.id;
+        }
+    } else {
+        return "User";
+    }
+});
+
 
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${id}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -26,8 +40,8 @@ const login = async () => {
             "Content-Type": "application/json",
         }
     });
-    localStorage.setItem("token", response.token);
-    localStorage.setItem("balance", response.balance);
+    userStore.setToken(response.token);
+    userStore.setBalance(response.balance);
     isLoading.value = false;
 }
 
@@ -42,12 +56,6 @@ useSeoMeta({
 
 
 onMounted(() => {
-    id = localStorage.getItem("id");
-    token = localStorage.getItem("token");
-    balance = localStorage.getItem("balance");
-    if (miniApp.initDataUnsafe.user) {
-        localStorage.setItem("id", miniApp.initDataUnsafe.user.id.toString());
-    }
     login();
     isLoading.value = false;
 });
@@ -60,7 +68,7 @@ onMounted(() => {
             <LucideRefreshCw @click="login" />
         </div>
         <div class="h-[12rem] p-5">
-            <p>Salom</p>
+            <p>Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
             <p>ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
             <p>Balans: {{ balance }}</p>
