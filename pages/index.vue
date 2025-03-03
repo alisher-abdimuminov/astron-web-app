@@ -56,15 +56,10 @@ useSeoMeta({
 
 
 onMounted(() => {
-    if (miniApp.onActive) {
-        console.log("active");
-        miniApp.onActive(() => {
-            console.log("andactive");
-            console.log(miniApp.initDataUnsafe);
-        })
+    if (miniApp.initData === "quiery_id") {
+        window.location.reload();
     }
     console.log(miniApp);
-    console.log(miniApp.isReady.value);
     login();
     isLoading.value = false;
 });
