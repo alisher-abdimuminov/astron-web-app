@@ -57,7 +57,12 @@ useSeoMeta({
 onMounted(() => {
     console.log(miniApp.initDataUnsafe);
     console.log(miniApp.isActive);
-    login();
+    // login();
+    document.addEventListener('DOMContentLoaded', function () {
+        const user = Telegram.WebApp.initDataUnsafe.user;
+
+        console.log(user);
+    });
     isLoading.value = false;
 });
 
