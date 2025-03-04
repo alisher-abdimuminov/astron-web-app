@@ -50,7 +50,7 @@ const getQuiz = computed(() => (index: number = 0) => {
 
 
 definePageMeta({
-    middleware: ["get-subjects"],
+    middleware: ["is-telegram", "get-subjects"],
 });
 
 onMounted(() => {

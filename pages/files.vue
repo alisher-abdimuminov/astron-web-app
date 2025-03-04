@@ -110,7 +110,7 @@ const downloadFile = async (file: IPurchasedFile) => {
 
 
 definePageMeta({
-    // middleware: ["is-telegram", "get-subjects"],
+    middleware: ["is-telegram", "get-subjects"],
 });
 
 
