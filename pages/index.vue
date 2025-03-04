@@ -65,13 +65,13 @@ onMounted(() => {
 <template>
     <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div class="flex justify-end p-5">
-            <LucideRefreshCw @click="login" />
+            <LucideRefreshCw :size="10" @click="login" />
         </div>
         <div class="h-[12rem] p-5">
-            <p>Salom {{ user }}</p>
+            <p class="text-lg">Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
-            <p>ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
-            <p>Balans: {{ balance }}</p>
+            <p class="text-lg">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
+            <p class="text-lg">Balans: {{ balance }}</p>
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">
