@@ -65,7 +65,7 @@ onMounted(() => {
                 <div class="bg-accent/30 rounded-md divide-y">
                     <div v-for="theme in themes" class="flex justify-between p-2" @click="() => { $route.query.type === 'quiz' ? navigateTo({ name: 'subjects-subjectid-classid-themeid-quiz', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) : navigateTo({ name: 'subjects-subjectid-classid-themeid-test', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) }">
                         <div class="flex items-center gap-2">
-                            <p class="break-all">{{ theme.mavzu_nomi }}</p>
+                            <p class="">{{ theme.mavzu_nomi }}</p>
                         </div>
                         <div class="flex items-center justify-center">
                             <LucideChevronRight />
