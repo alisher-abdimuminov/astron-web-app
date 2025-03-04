@@ -64,8 +64,8 @@ onMounted(() => {
 
 <template>
     <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
-        <div class="flex justify-end p-5">
-            <LucideRefreshCw :size="10" @click="login" />
+        <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
+            <LucideRefreshCw :size="15" @click="login" />
         </div>
         <div class="h-[12rem] p-5">
             <p class="text-lg">Salom {{ user }}</p>
