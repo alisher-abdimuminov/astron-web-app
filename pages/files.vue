@@ -87,27 +87,6 @@ const buyFile = async (file: IFile) => {
     isLoading.value = false;
 }
 
-const downloadFile = async (file: IPurchasedFile) => {
-    let response = await $fetch<Blob>(`https://astrontest.uz/mypage/get-file.php?token=${token.value}&file_id=${file.file_id}`, {
-        method: "GET",
-    });
-
-    // const blob = await response;
-    // console.log(blob);
-    const url = window.URL.createObjectURL(await response);
-    const a = document.createElement("a");
-    console.log(url);
-    a.href = url;
-    a.href = url;
-    a.download = `${file.file_name}.docx`
-    document.body.appendChild(a);
-    a.click();
-    // document.body.removeChild(a);
-    // window.URL.revokeObjectURL(url);
-}
-
-
-
 
 definePageMeta({
     middleware: ["is-telegram", "get-subjects"],
@@ -147,7 +126,7 @@ onMounted(() => {
                 </TabsList>
                 <TabsContent value="files">
                     <div class="bg-accent/30 rounded-md divide-y">
-                        <div v-for="file in files" class="flex justify-between p-2">
+                        <div v-for="file in files.slice().reverse()" class="flex justify-between p-2">
                             <div class="flex items-center gap-2">
                                 <div>
                                     <LucideFile />
