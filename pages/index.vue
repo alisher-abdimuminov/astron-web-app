@@ -49,7 +49,7 @@ const login = async () => {
 
 
 definePageMeta({
-    middleware: [ "get-subjects"],
+    middleware: ["is-telegram", "get-subjects"],
 });
 
 useSeoMeta({
@@ -99,8 +99,8 @@ onMounted(() => {
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
                         <p>Fayl market</p>
-                        <div v-if="newFile" class="absolute top-0 right-0">
-                            <LucideBellPlus class="animate-bounce" />
+                        <div v-if="newFile" class="absolute top-4 right-4">
+                            <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
                         </div>
                     </div>
                     <div class="flex items-center justify-center">
