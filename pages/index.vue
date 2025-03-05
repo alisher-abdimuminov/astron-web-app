@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw } from 'lucide-vue-next';
+import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 
 
@@ -8,6 +8,7 @@ const miniApp = useMiniApp();
 const userStore = useUserStore();
 
 const { token, id, balance } = storeToRefs(userStore);
+const newFile = ref(false);
 
 const isLoading = ref(true);
 
@@ -31,7 +32,7 @@ const user = computed(() => {
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string, new_file: boolean }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -42,12 +43,13 @@ const login = async () => {
     });
     userStore.setToken(response.token);
     userStore.setBalance(response.balance);
+    newFile.value = response.new_file;
     isLoading.value = false;
 }
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: [ "get-subjects"],
 });
 
 useSeoMeta({
@@ -93,10 +95,13 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div class="flex justify-between p-3" @click="navigateTo({ name: 'files' })">
+                <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'files' })">
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
                         <p>Fayl market</p>
+                        <div v-if="newFile" class="absolute top-0 right-0">
+                            <LucideBellPlus class="animate-bounce" />
+                        </div>
                     </div>
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
