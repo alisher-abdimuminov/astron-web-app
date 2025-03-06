@@ -138,7 +138,7 @@ onMounted(() => {
                             </div>
                             <div class="flex items-center justify-center">
                                 <Dialog>
-                                    <DialogTrigger v-if="parseFloat(balance) > parseFloat(file.file_price)">
+                                    <DialogTrigger v-if="parseFloat(balance) >= parseFloat(file.file_price)">
                                         <Button size="sm" class="bg-green-500"><LucideShoppingCart /> {{ file.file_price }}</Button>
                                     </DialogTrigger>
                                     <DialogContent class="w-3/4">
