@@ -138,8 +138,8 @@ onMounted(() => {
                             </div>
                             <div class="flex items-center justify-center">
                                 <Dialog>
-                                    <DialogTrigger v-if="parseFloat(balance) >= parseFloat(file.file_price)">
-                                        <Button size="sm" class="bg-green-500"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                    <DialogTrigger v-if="parseInt(balance) >= parseInt(file.file_price)">
+                                        <Button size="sm" class="bg-green-500"><LucideShoppingCart /> {{ new Intl.NumberFormat("uz-Uz").format(parseInt(file.file_price)) }}</Button>
                                     </DialogTrigger>
                                     <DialogContent class="w-3/4">
                                         <DialogHeader>
@@ -156,7 +156,7 @@ onMounted(() => {
                                 </Dialog>
                                 <Dialog>
                                     <DialogTrigger>
-                                        <Button v-if="parseFloat(balance) < parseFloat(file.file_price)" size="sm" variant="destructive"><LucideShoppingCart /> {{ file.file_price }}</Button>
+                                        <Button v-if="parseInt(balance) < parseInt(file.file_price)" size="sm" variant="destructive"><LucideShoppingCart /> {{ new Intl.NumberFormat("uz-Uz").format(parseInt(file.file_price)) }}</Button>
                                     </DialogTrigger>
                                     <DialogContent class="w-3/4">
                                         <DialogHeader>
