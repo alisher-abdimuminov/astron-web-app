@@ -1,10 +1,10 @@
-import { read, write, formatDate } from "~/db";
+import { read, write } from "~/db";
 
-export default defineEventHandler((event) => {
-    const date = formatDate(new Date());
-    
-    const count = read(date) + 1;
-    write(date, count);
+export default defineEventHandler(() => {
+    const data = read();
+    const viewers = data.viewers + 1;
 
-    return { users: count };
+    write(viewers);
+
+    return { viewers };
 });

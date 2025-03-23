@@ -11,7 +11,7 @@ const { token, id, balance } = storeToRefs(userStore);
 const newFile = ref(false);
 
 const isLoading = ref(true);
-const users = ref(0);
+const viewers = ref(0);
 
 miniApp.ready();
 
@@ -50,7 +50,7 @@ const login = async () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    // middleware: ["is-telegram", "get-subjects"],
 });
 
 useSeoMeta({
@@ -61,11 +61,11 @@ useSeoMeta({
 onMounted(async() => {
     login();
     isLoading.value = false;
-    let response = await $fetch<{ users: number }>("/api/viewers", {
+    let response = await $fetch<{ viewers: number }>("/api/viewers", {
         method: "POST",
     });
 
-    users.value = response.users;
+    viewers.value = response.viewers;
 });
 
 </script>
@@ -75,7 +75,7 @@ onMounted(async() => {
         <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
             <LucideRefreshCw :size="15" @click="login" />
         </div>
-        <p class="fixed bottom-2 left-2 border rounded-full p-1">{{ users }}</p>
+        <p class="fixed bottom-2 left-2 border rounded-full p-1">{{ viewers }}</p>
         <div class="h-[12rem] p-5">
             <p class="text-lg">Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
