@@ -59,14 +59,13 @@ useSeoMeta({
 
 
 onMounted(async() => {
+    login();
+    isLoading.value = false;
     let response = await $fetch<{ users: number }>("/api/viewers", {
         method: "POST",
     });
 
     users.value = response.users;
-    
-    login();
-    isLoading.value = false;
 });
 
 </script>
