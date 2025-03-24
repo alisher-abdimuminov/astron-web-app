@@ -50,7 +50,7 @@ const login = async () => {
 
 
 definePageMeta({
-    // middleware: ["is-telegram", "get-subjects"],
+    middleware: ["is-telegram", "get-subjects"],
 });
 
 useSeoMeta({
@@ -59,13 +59,17 @@ useSeoMeta({
 
 
 onMounted(async() => {
+    let date = new Date();
+    let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+    let month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+    let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
     login();
     isLoading.value = false;
-    let response = await $fetch<{ viewers: number }>("/api/viewers", {
+    let response = await $fetch<{ count: number }>(`https://astronapi.pythonanywhere.com/counter/${day}-${month}-${year}/`, {
         method: "POST",
     });
 
-    viewers.value = response.viewers;
+    viewers.value = response.count;
 });
 
 </script>
