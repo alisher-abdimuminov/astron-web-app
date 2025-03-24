@@ -79,7 +79,7 @@ onMounted(async() => {
         <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
             <LucideRefreshCw :size="15" @click="login" />
         </div>
-        <p class="fixed bottom-2 left-2 border rounded-full p-1">{{ viewers }}</p>
+        <p class="fixed bottom-2 left-2 border rounded-full p-1">Kundalik foydalanishlar soni: {{ viewers }}</p>
         <div class="h-[12rem] p-5">
             <p class="text-lg">Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
