@@ -88,7 +88,7 @@ onMounted(async() => {
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">
-                <!-- <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'quiz' } })">
+                <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'quiz' } })">
                     <div class="flex items-center gap-2">
                         <LucideMessageCircleQuestion :size="20" />
                         <p>Savollar</p>
@@ -96,7 +96,7 @@ onMounted(async() => {
                     <div class="flex items-center justify-center">
                         <LucideChevronRight />
                     </div>
-                </div> -->
+                </div>
                 <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'test' } })">
                     <div class="flex items-center gap-2">
                         <LucideListCheck :size="20" />
