@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus } from 'lucide-vue-next';
+import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus, LucideBell } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 
 
@@ -52,7 +52,7 @@ const login = async () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    // middleware: ["is-telegram", "get-subjects"],
 });
 
 useSeoMeta({
@@ -134,8 +134,11 @@ onMounted(async() => {
                     </div>
                 </div>
             </div>
-            <div class="bg-accent/30 rounded-md">
-                <div v-if="announcement" v-html="announcement"></div>
+            <div v-if="announcement" class="bg-orange-500/10 border border-orange-500 rounded-md p-3 flex items-center gap-2">
+                <div class="p-2">
+                    <LucideBell class="text-orange-500 animate-bounce" />
+                </div>
+                <div v-html="announcement"></div>
             </div>
         </div>
     </div>
