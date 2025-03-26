@@ -12,6 +12,8 @@ const newFile = ref(false);
 
 const isLoading = ref(true);
 const viewers = ref(0);
+const announcement = ref("");
+const created = ref("");
 
 miniApp.ready();
 
@@ -68,8 +70,12 @@ onMounted(async() => {
     let response = await $fetch<{ count: number }>(`https://astronapi.pythonanywhere.com/counter/${day}-${month}-${year}/`, {
         method: "POST",
     });
-
     viewers.value = response.count;
+
+    let response2 = await $fetch<{ content: string, created: string }>("https://astronapi.pythonanywhere.com/announcement/");
+    announcement.value = response2.content;
+    created.value = response2.created;
+
 });
 
 </script>
@@ -127,6 +133,9 @@ onMounted(async() => {
                         <LucideChevronRight />
                     </div>
                 </div>
+            </div>
+            <div class="bg-accent/30 rounded-md">
+                <div v-if="announcement" v-html="announcement"></div>
             </div>
         </div>
     </div>
