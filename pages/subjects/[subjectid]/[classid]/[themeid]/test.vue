@@ -67,7 +67,7 @@ const calculate = computed(() => () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects", "is-telegram"],
 });
 
 onMounted(() => {

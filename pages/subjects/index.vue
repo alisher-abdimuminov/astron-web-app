@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight, LucideLock } from 'lucide-vue-next';
+import type { ISubject } from '~/types';
 
 
+const route = useRoute();
 const router = useRouter();
 
 const subjectsStore = useSubjectsStore();
@@ -10,9 +12,40 @@ const { subjects } = storeToRefs(subjectsStore);
 
 const isLoading = ref(true);
 
+const userStore = useUserStore();
+
+const { token, balance } = storeToRefs(userStore);
+
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects", "is-telegram"],
 });
+
+
+const getSubjects = async () => {
+    const response = await $fetch<ISubject[]>("https://astrontest.uz/mobile-api/api/uz/subjectuz?lang=uz", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "token": token.value,
+        })
+    });
+    
+    subjectsStore.set(response);
+}
+
+
+const buySubject = async (subject: ISubject) => {
+    let response = await $fetch("https://astrontest.uz/mobile-api/api/uz/buy-subject", {
+        method: "POST",
+        body: JSON.stringify({
+            "token": token.value,
+            "subject_id": subject.subject_id
+        })
+    });
+    getSubjects();
+}
 
 
 onMounted(() => {
@@ -31,12 +64,39 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <br>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="subject in subjects" class="flex justify-between p-2" @click="navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query })">
+                <div v-for="subject in subjects" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
                     <div class="flex items-center gap-2">
-                        <p class="">{{ subject.subject_name }}</p>
+                        <p class="">{{ subject.subject_name }} {{ subject.purchased }}</p>
                     </div>
                     <div class="flex items-center justify-center">
-                        <LucideChevronRight />
+                        <Dialog>
+                            <DialogTrigger v-if="route.query.type !== 'quiz' && !subject.purchased">
+                                <Button size="xs">
+                                    <LucideLock :size="15" />
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Ogohlantirish</DialogTitle>
+                                    <DialogDescription></DialogDescription>
+                                </DialogHeader>
+                                <p v-if="parseInt(balance) >= 50000">
+                                    <span class="font-bold">"{{ subject.subject_name }}"</span> ni sotib olasizmi?
+                                </p>
+                                <p v-else>
+                                    Kechirasiz mablag' yetarli emas. "{{ subject.subject_name }}" ni sotib olish uchun balansingizni to'ldiring.
+                                </p>
+                                <DialogFooter class="flex-row-reverse gap-2">
+                                    <DialogClose>
+                                        <Button v-if="parseInt(balance) >= 50000" @click="buySubject(subject)">Ha</Button>
+                                    </DialogClose>
+                                    <DialogClose>
+                                        <Button variant="destructive">Yopish</Button>
+                                    </DialogClose>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                        <LucideChevronRight v-if="route.query.type === 'quiz' || subject.purchased" />
                     </div>
                 </div>
             </div>
