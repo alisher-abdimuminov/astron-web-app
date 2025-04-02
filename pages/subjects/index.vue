@@ -86,7 +86,8 @@ onMounted(() => {
                                     <span>To'lov summasi: 50 000 so'm</span>
                                 </p>
                                 <p class="text-center" v-else>
-                                    Fanni ochish uchun bir martalik to'lov miqdori: 50 000 so'm
+                                    Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
+                                    <span>Fanni ochish uchun bir martalik to'lov summasi: 50 000 so'm.</span>
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
