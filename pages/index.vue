@@ -90,7 +90,7 @@ onMounted(async() => {
             <p class="text-lg">Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
             <p class="text-lg">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
-            <p class="text-lg">Balans: {{ balance }}</p>
+            <p class="text-lg">Balans: {{ new Intl.NumberFormat("uz-Uz").format(parseInt(balance)) }}</p>
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">
