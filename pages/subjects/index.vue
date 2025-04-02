@@ -82,7 +82,8 @@ onMounted(() => {
                                 </DialogHeader>
                                 <p class="text-center" v-if="parseInt(balance) >= 50000">
                                     <span class="font-bold">"{{ subject.subject_name }}"</span> ni ochish uchun bir martalik to'lov qiling.
-To'lov summasi: 50 000 so'm
+                                    <br>
+                                    <span>To'lov summasi: 50 000 so'm</span>
                                 </p>
                                 <p class="text-center" v-else>
                                     Fanni ochish uchun bir martalik to'lov miqdori: 50 000 so'm
