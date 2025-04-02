@@ -66,7 +66,7 @@ onMounted(() => {
             <div class="bg-accent/30 rounded-md divide-y">
                 <div v-for="subject in subjects" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
                     <div class="flex items-center gap-2">
-                        <p class="">{{ subject.subject_name }} {{ subject.purchased }}</p>
+                        <p class="">{{ subject.subject_name }}</p>
                     </div>
                     <div class="flex items-center justify-center">
                         <Dialog>
@@ -77,21 +77,19 @@ onMounted(() => {
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Ogohlantirish</DialogTitle>
+                                    <DialogTitle>Eslatma</DialogTitle>
                                     <DialogDescription></DialogDescription>
                                 </DialogHeader>
-                                <p v-if="parseInt(balance) >= 50000">
-                                    <span class="font-bold">"{{ subject.subject_name }}"</span> ni sotib olasizmi?
+                                <p class="text-center" v-if="parseInt(balance) >= 50000">
+                                    <span class="font-bold">"{{ subject.subject_name }}"</span> ni ochish uchun bir martalik to'lov qiling.
+To'lov summasi: 50 000 so'm
                                 </p>
-                                <p v-else>
-                                    Kechirasiz mablag' yetarli emas. "{{ subject.subject_name }}" ni sotib olish uchun balansingizni to'ldiring.
+                                <p class="text-center" v-else>
+                                    Fanni ochish uchun bir martalik to'lov miqdori: 50 000 so'm
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
-                                        <Button v-if="parseInt(balance) >= 50000" @click="buySubject(subject)">Ha</Button>
-                                    </DialogClose>
-                                    <DialogClose>
-                                        <Button variant="destructive">Yopish</Button>
+                                        <Button v-if="parseInt(balance) >= 50000" @click="buySubject(subject)">To'lov qilish</Button>
                                     </DialogClose>
                                 </DialogFooter>
                             </DialogContent>
