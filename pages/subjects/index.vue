@@ -64,7 +64,7 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <br>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="subject in subjects" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
+                <div v-for="subject in subjects.filter(subject => subject.q_status === 1)" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
                     <div class="flex items-center gap-2">
                         <p class="">{{ subject.subject_name }}</p>
                     </div>
