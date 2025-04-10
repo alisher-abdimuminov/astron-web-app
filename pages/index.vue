@@ -52,7 +52,7 @@ const login = async () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects", "is-telegram"],
 });
 
 useSeoMeta({
