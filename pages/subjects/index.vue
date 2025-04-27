@@ -80,18 +80,18 @@ onMounted(() => {
                                     <DialogTitle>Eslatma</DialogTitle>
                                     <DialogDescription></DialogDescription>
                                 </DialogHeader>
-                                <p class="text-center" v-if="parseInt(balance) >= 50000">
+                                <p class="text-center" v-if="parseInt(balance) >= 29000">
                                     <span class="font-bold">"{{ subject.subject_name }}"</span> ni ochish uchun bir martalik to'lov qiling.
                                     <br>
-                                    <span>To'lov summasi: 50 000 so'm</span>
+                                    <span>To'lov summasi: 29 000 so'm</span>
                                 </p>
                                 <p class="text-center" v-else>
                                     Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
-                                    <span>Fanni ochish uchun bir martalik to'lov summasi: 50 000 so'm.</span>
+                                    <span>Fanni ochish uchun bir martalik to'lov summasi: 29 000 so'm.</span>
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
-                                        <Button v-if="parseInt(balance) >= 50000" @click="buySubject(subject)">To'lov qilish</Button>
+                                        <Button v-if="parseInt(balance) >= 29000" @click="buySubject(subject)">To'lov qilish</Button>
                                     </DialogClose>
                                 </DialogFooter>
                             </DialogContent>
