@@ -60,9 +60,10 @@ const selected = computed(() => {
 
 const calculate = computed(() => () => {
     let all = tests.value.length;
+    let selected = tests.value.filter((test) => test.is_selected).length;
     let correct = tests.value.filter(test => test.is_solved).length;
     let incorrect = all - correct;
-    return { all, correct, incorrect };
+    return { all, correct, incorrect, selected };
 });
 
 
@@ -86,7 +87,7 @@ onMounted(() => {
                 <p>Test</p>
             </div>
             <div>
-                <Drawer v-if="selected">
+                <Drawer>
                     <DrawerTrigger as-child>
                         <Button size="sm">Natija</Button>
                     </DrawerTrigger>
@@ -95,28 +96,20 @@ onMounted(() => {
                             <DrawerTitle>Natija</DrawerTitle>
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
-                        <div class="border overflow-auto rounded-md">
-                            <Table>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell class="border-r">Savollar soni</TableCell>
-                                        <TableCell>{{ calculate().all }}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell class="border-r">To'g'ri javob</TableCell>
-                                        <TableCell>{{ calculate().correct }}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell class="border-r">Noto'g'ri javob</TableCell>
-                                        <TableCell>{{ calculate().incorrect }}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell class="border-r">Foiz</TableCell>
-                                        <TableCell>{{ Math.ceil((calculate().correct / calculate().all) * 100) }}%</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                        <div class="flex items-center gap-1">
+                            <p>Umumiy: {{ calculate().all }}</p>
+                            <Separator class="h-8" />
+                            <p>Belgilangan: {{ calculate().selected }}</p>
                         </div>
+                        <div class="flex items-center gap-1">
+                            <p>To'g'ri javob: {{ calculate().correct }}</p>
+                            <Separator class="h-8" />
+                            <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
+                        </div>
+                        <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
+                        <p class="my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
+                        <p class="my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
+                        <p class="my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
                     </DrawerContent>
                 </Drawer>
             </div>
