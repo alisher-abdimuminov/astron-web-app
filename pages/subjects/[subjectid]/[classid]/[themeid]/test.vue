@@ -98,12 +98,12 @@ onMounted(() => {
                         </DrawerHeader>
                         <div class="flex items-center gap-1">
                             <p>Umumiy: {{ calculate().all }}</p>
-                            <Separator class="h-8" />
+                            <Separator class="h-8" orientation="vertical" />
                             <p>Belgilangan: {{ calculate().selected }}</p>
                         </div>
                         <div class="flex items-center gap-1">
                             <p>To'g'ri javob: {{ calculate().correct }}</p>
-                            <Separator class="h-8" />
+                            <Separator class="h-8" orientation="vertical" />
                             <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                         </div>
                         <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
