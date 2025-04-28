@@ -97,14 +97,14 @@ onMounted(() => {
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
                         <div class="flex flex-col items-center justify-center">
-                            <div class="flex flex-col gap-1 items-center justify-center bg-accent/50">
+                            <div class="flex flex-col gap-1 items-center justify-center bg-accent/50 p-2 rounded-md">
                                 <div class="flex items-center gap-1">
-                                    <p>Umumiy: {{ calculate().all }}</p>
+                                    <p>Umumiy: {{ calculate().all }} ta</p>
                                     <Separator class="h-8" orientation="vertical" />
-                                    <p>Belgilangan: {{ calculate().selected }}</p>
+                                    <p>Belgilangan: {{ calculate().selected }} ta</p>
                                 </div>
                                 <div class="flex items-center gap-1">
-                                    <p>To'g'ri javob: {{ calculate().correct }}</p>
+                                    <p>To'g'ri javob: {{ calculate().correct }} ta</p>
                                     <Separator class="h-8" orientation="vertical" />
                                     <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                                 </div>
