@@ -96,20 +96,24 @@ onMounted(() => {
                             <DrawerTitle>Natija</DrawerTitle>
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
-                        <div class="flex items-center gap-1">
-                            <p>Umumiy: {{ calculate().all }}</p>
-                            <Separator class="h-8" orientation="vertical" />
-                            <p>Belgilangan: {{ calculate().selected }}</p>
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="flex flex-col gap-1 items-center justify-center bg-accent/50">
+                                <div class="flex items-center gap-1">
+                                    <p>Umumiy: {{ calculate().all }}</p>
+                                    <Separator class="h-8" orientation="vertical" />
+                                    <p>Belgilangan: {{ calculate().selected }}</p>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <p>To'g'ri javob: {{ calculate().correct }}</p>
+                                    <Separator class="h-8" orientation="vertical" />
+                                    <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
+                                </div>
+                            </div>
+                            <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
+                            <p class="my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
+                            <p class="my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
+                            <p class="my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
                         </div>
-                        <div class="flex items-center gap-1">
-                            <p>To'g'ri javob: {{ calculate().correct }}</p>
-                            <Separator class="h-8" orientation="vertical" />
-                            <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
-                        </div>
-                        <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
-                        <p class="my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
-                        <p class="my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
-                        <p class="my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
                     </DrawerContent>
                 </Drawer>
             </div>
