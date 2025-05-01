@@ -124,7 +124,7 @@ onMounted(async() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div class="flex justify-between p-3" @click="navigateTo('https://payme.uz/fallback/merchant/?id=6694e98072bc9a1487f1c636', { external: true, open: { target: '_blank' } })">
+                <div class="flex justify-between p-3" @click="navigateTo('https://t.me/astron_corp', { external: true, open: { target: '_blank' } })">
                     <div class="flex items-center gap-2">
                         <LucideWallet :size="20" />
                         <p>Balansni to'ldirish</p>

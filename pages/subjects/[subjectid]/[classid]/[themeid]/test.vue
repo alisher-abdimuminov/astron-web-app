@@ -109,10 +109,11 @@ onMounted(() => {
                                     <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                                 </div>
                             </div>
+                            <p class="text-end text-muted-foreground">{{ new Date().getDay() }}.{{ new Date().getMonth() + 1 }}.{{ new Date().getFullYear() }}</p>
                             <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
                             <p class="my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
                             <p class="my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
-                            <p class="my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
+                            <p class="w-full my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
                         </div>
                     </DrawerContent>
                 </Drawer>
