@@ -96,8 +96,8 @@ onMounted(() => {
                             <DrawerTitle></DrawerTitle>
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
-                        <div class="grid items-center justify-center w-full">
-                            <p class="text-end text-muted-foreground">{{ new Date().getDay() }}.{{ new Date().getMonth() + 1 }}.{{ new Date().getFullYear() }}</p>
+                        <div class="grid items-center justify-center gap-2 w-full">
+                            <p class="text-end text-muted-foreground">{{ new Date().getDay().toString().padStart(2, '0') }}.{{ (new Date().getMonth() + 1).toString().padStart(2, '0') }}.{{ new Date().getFullYear() }}</p>
                             <div class="flex flex-col gap-1 items-center justify-center bg-accent/50 p-2 rounded-md">
                                 <div class="flex items-center gap-1">
                                     <p>Umumiy: {{ calculate().all }} ta</p>
@@ -110,10 +110,10 @@ onMounted(() => {
                                     <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                                 </div>
                             </div>
-                            <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
-                            <p class="my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
-                            <p class="my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
-                            <p class="w-full my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
                         </div>
                     </DrawerContent>
                 </Drawer>
