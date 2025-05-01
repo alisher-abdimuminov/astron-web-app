@@ -93,10 +93,11 @@ onMounted(() => {
                     </DrawerTrigger>
                     <DrawerContent class="h-3/4 p-5">
                         <DrawerHeader>
-                            <DrawerTitle>Natija</DrawerTitle>
+                            <DrawerTitle></DrawerTitle>
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
-                        <div class="flex flex-col items-center justify-center">
+                        <div class="grid items-center justify-center w-full">
+                            <p class="text-end text-muted-foreground">{{ new Date().getDay() }}.{{ new Date().getMonth() + 1 }}.{{ new Date().getFullYear() }}</p>
                             <div class="flex flex-col gap-1 items-center justify-center bg-accent/50 p-2 rounded-md">
                                 <div class="flex items-center gap-1">
                                     <p>Umumiy: {{ calculate().all }} ta</p>
@@ -109,7 +110,6 @@ onMounted(() => {
                                     <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                                 </div>
                             </div>
-                            <p class="text-end text-muted-foreground">{{ new Date().getDay() }}.{{ new Date().getMonth() + 1 }}.{{ new Date().getFullYear() }}</p>
                             <p class="my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
                             <p class="my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
                             <p class="my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
