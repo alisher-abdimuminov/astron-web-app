@@ -97,7 +97,7 @@ onMounted(() => {
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
                         <div class="grid items-center justify-center gap-2 w-full">
-                            <p class="text-end text-muted-foreground">{{ new Date().getDay().toString().padStart(2, '0') }}.{{ (new Date().getMonth() + 1).toString().padStart(2, '0') }}.{{ new Date().getFullYear() }}</p>
+                            <p class="text-end text-muted-foreground">{{ new Date().toLocaleDateString("de-DE") }}</p>
                             <div class="flex flex-col gap-1 items-center justify-center bg-accent/50 p-2 rounded-md">
                                 <div class="flex items-center gap-1">
                                     <p>Umumiy: {{ calculate().all }} ta</p>
