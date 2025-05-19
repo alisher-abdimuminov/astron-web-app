@@ -110,7 +110,7 @@ onMounted(() => {
                                     <p>Foiz: {{ isNaN(Math.ceil((calculate().correct / calculate().selected) * 100)) ? 0 : Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                                 </div>
                             </div>
-                            <p class="w-full font-bold text-center my-2 p-2 bg-red-500 rounded-full" v-if="isNaN(Math.ceil((calculate().correct / calculate().selected) * 100)) ? 0 : Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-red-500 rounded-full" v-if="(isNaN(Math.ceil((calculate().correct / calculate().selected) * 100)) ? 0 : Math.ceil((calculate().correct / calculate().selected) * 100)) < 60">Qoniqarsiz</p>
                             <p class="w-full font-bold text-center my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
                             <p class="w-full font-bold text-center my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
                             <p class="w-full font-bold text-center my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
