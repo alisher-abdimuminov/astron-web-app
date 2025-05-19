@@ -107,7 +107,7 @@ onMounted(() => {
                                 <div class="flex items-center gap-1">
                                     <p>To'g'ri javob: {{ calculate().correct }} ta</p>
                                     <Separator class="h-8" orientation="vertical" />
-                                    <p>Foiz: {{ Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
+                                    <p>Foiz: {{ isNaN(Math.ceil((calculate().correct / calculate().selected) * 100)) ? 0 : Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
                                 </div>
                             </div>
                             <p class="w-full font-bold text-center my-2 p-2 bg-red-500 rounded-full" v-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 60">Qoniqarsiz</p>
