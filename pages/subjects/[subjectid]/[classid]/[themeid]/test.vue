@@ -97,7 +97,7 @@ onMounted(() => {
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
                         <div class="grid items-center justify-center gap-2 w-full">
-                            <p class="text-end text-muted-foreground">{{ new Date().toLocaleDateString("de-DE") }}</p>
+                            <p class="text-end text-muted-foreground">{{ new Date().toLocaleDateString("uz-UZ") }}</p>
                             <div class="flex flex-col gap-1 items-center justify-center bg-accent/50 p-2 rounded-md">
                                 <div class="flex items-center gap-1">
                                     <p>Umumiy: {{ calculate().all }} ta</p>
