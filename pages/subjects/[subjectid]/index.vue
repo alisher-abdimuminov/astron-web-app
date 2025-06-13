@@ -45,7 +45,7 @@ const buyKlass = async (klass: IClass) => {
         method: "POST",
         body: JSON.stringify({
             "token": token.value,
-            "class_id": klass.subject_id
+            "class_id": klass.classes_id
         })
     });
     getClassess();
