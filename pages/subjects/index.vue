@@ -17,7 +17,7 @@ const userStore = useUserStore();
 const { token, balance } = storeToRefs(userStore);
 
 definePageMeta({
-    middleware: ["get-subjects", "is-telegram"],
+    middleware: ["get-subjects", ],
 });
 
 
@@ -25,7 +25,7 @@ const getSubjects = async () => {
     const response = await $fetch<ISubject[]>("https://astrontest.uz/mobile-api/api/uz/subjectuz?lang=uz", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
             "token": token.value,
@@ -64,39 +64,12 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <br>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-if="route.query.type === 'test'" v-for="subject in subjects.filter(subject => subject.t_status === 1)" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
+                <div v-if="route.query.type === 'test'" v-for="subject in subjects.filter(subject => subject.t_status === 1)" class="flex justify-between p-2" @click="() => { navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) }">
                     <div class="flex items-center gap-2">
                         <p class="">{{ subject.subject_name }}</p>
                     </div>
                     <div class="flex items-center justify-center">
-                        <Dialog>
-                            <DialogTrigger v-if="route.query.type === 'test' && !subject.purchased">
-                                <Button size="xs">
-                                    <LucideLock :size="15" />
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>Eslatma</DialogTitle>
-                                    <DialogDescription></DialogDescription>
-                                </DialogHeader>
-                                <p class="text-center" v-if="parseInt(balance) >= subject.price">
-                                    <span class="font-bold">"{{ subject.subject_name }}"</span> ni ochish uchun bir martalik to'lov qiling.
-                                    <br>
-                                    <span>To'lov summasi: {{ subject.price }} so'm</span>
-                                </p>
-                                <p class="text-center" v-else>
-                                    Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
-                                    <span>Fanni ochish uchun bir martalik to'lov summasi: {{ subject.price }} so'm.</span>
-                                </p>
-                                <DialogFooter class="flex-row-reverse gap-2">
-                                    <DialogClose>
-                                        <Button v-if="parseInt(balance) >= subject.price" @click="buySubject(subject)">Balansdan yechish</Button>
-                                    </DialogClose>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-                        <LucideChevronRight v-if="subject.purchased" />
+                        <LucideChevronRight />
                     </div>
                 </div>
                 <div v-else v-for="subject in subjects.filter(subject => subject.q_status === 1)" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
