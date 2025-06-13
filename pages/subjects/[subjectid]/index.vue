@@ -101,7 +101,7 @@ onMounted(() => {
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
-                                        <Button v-if="parseInt(balance) >= klass.price" @click="buyKlass;(klass)">Balansdan yechish</Button>
+                                        <Button v-if="parseInt(balance) >= klass.price" @click="buyKlass(klass)">Balansdan yechish</Button>
                                     </DialogClose>
                                 </DialogFooter>
                             </DialogContent>
