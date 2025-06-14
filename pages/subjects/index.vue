@@ -17,7 +17,7 @@ const userStore = useUserStore();
 const { token, balance } = storeToRefs(userStore);
 
 definePageMeta({
-    middleware: ["get-subjects", ],
+    middleware: ["get-subjects", "is-telegram"],
 });
 
 

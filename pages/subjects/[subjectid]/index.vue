@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronLeft, LucideChevronRight, LucideLock } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight, LucideLock, LucideShoppingCart } from 'lucide-vue-next';
 
 
 interface IClass {
@@ -53,7 +53,7 @@ const buyKlass = async (klass: IClass) => {
 
 
 definePageMeta({
-    middleware: ["get-subjects", ],
+    middleware: ["get-subjects", "is-telegram"],
 });
 
 onMounted(() => {
@@ -81,8 +81,9 @@ onMounted(() => {
                         <LucideChevronRight v-if="klass.purchased" />
                         <Dialog v-else>
                             <DialogTrigger>
-                                <Button size="xs">
-                                    <LucideLock :size="15" />
+                                <Button size="xs" :class="klass.price < parseInt(balance) ? 'bg-red-500' : 'bg-green-500'">
+                                    <LucideShoppingCart />
+                                    <span>{{ klass.price }}</span>
                                 </Button>
                             </DialogTrigger>
                             <DialogContent>
@@ -97,7 +98,7 @@ onMounted(() => {
                                 </p>
                                 <p class="text-center" v-else>
                                     Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
-                                    <span>Fanni ochish uchun bir martalik to'lov summasi: {{ klass.price }} so'm.</span>
+                                    <span>Darslikni ochish uchun bir martalik to'lov summasi: {{ klass.price }} so'm.</span>
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
