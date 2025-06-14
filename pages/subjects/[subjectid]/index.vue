@@ -81,7 +81,7 @@ onMounted(() => {
                         <LucideChevronRight v-if="klass.purchased" />
                         <Dialog v-else>
                             <DialogTrigger>
-                                <Button size="xs" :class="klass.price < parseInt(balance) ? 'bg-red-500' : 'bg-green-500'">
+                                <Button size="xs" :class="klass.price > parseInt(balance) ? 'bg-red-500' : 'bg-green-500'">
                                     <LucideShoppingCart />
                                     <span>{{ klass.price }}</span>
                                 </Button>
