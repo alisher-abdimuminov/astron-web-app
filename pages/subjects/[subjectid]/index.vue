@@ -83,7 +83,7 @@ onMounted(() => {
                             <DialogTrigger>
                                 <Button size="xs" :class="klass.price > parseInt(balance) ? 'bg-red-500' : 'bg-green-500'">
                                     <LucideShoppingCart />
-                                    <span>{{ klass.price }}</span>
+                                    <span>{{ new Intl.NumberFormat("uz-UZ").format(klass.price) }}</span>
                                 </Button>
                             </DialogTrigger>
                             <DialogContent>
@@ -94,11 +94,11 @@ onMounted(() => {
                                 <p class="text-center" v-if="parseInt(balance) >= klass.price">
                                     <span class="font-bold">"{{ klass.classes_name }}"</span> ni ochish uchun bir martalik to'lov qiling.
                                     <br>
-                                    <span>To'lov summasi: {{ klass.price }} so'm</span>
+                                    <span>To'lov summasi: {{ new Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm</span>
                                 </p>
                                 <p class="text-center" v-else>
                                     Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
-                                    <span>Darslikni ochish uchun bir martalik to'lov summasi: {{ klass.price }} so'm.</span>
+                                    <span>Darslikni ochish uchun bir martalik to'lov summasi: {{ new Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm.</span>
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
