@@ -11,7 +11,6 @@ const { token, id, balance } = storeToRefs(userStore);
 const newFile = ref(false);
 
 const isLoading = ref(true);
-const viewers = ref(0);
 const announcement = ref("");
 const created = ref("");
 
@@ -70,7 +69,6 @@ onMounted(async() => {
     let response = await $fetch<{ count: number }>(`https://astronapi.pythonanywhere.com/counter/${day}-${month}-${year}/`, {
         method: "POST",
     });
-    viewers.value = response.count;
 
     let response2 = await $fetch<{ content: string, created: string }>("https://astronapi.pythonanywhere.com/announcement/");
     announcement.value = response2.content;
@@ -85,7 +83,6 @@ onMounted(async() => {
         <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
             <LucideRefreshCw :size="15" @click="login" />
         </div>
-        <p class="fixed bottom-2 left-2 border rounded-full p-1">Kundalik foydalanishlar soni: {{ viewers }}</p>
         <div class="h-[12rem] p-5">
             <p class="text-lg">Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
