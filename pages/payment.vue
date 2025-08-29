@@ -31,7 +31,7 @@ onMounted(() => {
             <p>Balansni to'ldirish</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col items-center justify-center gap-2 p-5">
-            <p class="text-lg font-bold">PayMe orqali to'lov qilish:</p>
+            <p class="text-lg font-bold">Payme orqali to'lov qilish:</p>
             <div class="bg-transparent dark:bg-primary w-1/2 h-18 rounded-md" @click="navigateTo('https://payme.uz/fallback/merchant/?id=6694e98072bc9a1487f1c636', { open: { target: '_blank' }, external: true })">
                 <img src="/assets/images/payme.png" alt="">
             </div>
@@ -39,9 +39,9 @@ onMounted(() => {
             <Separator />
             <p class="text-xl font-bold">Karta orqali to'lov qilish:</p>
             <span class="font-bold font-mono">9860 0101 3465 0976</span>
-            <span class="text-sm">(I.Yo'ldoshev)</span>
+            <span class="text-sm">(I. Yo'ldashev)</span>
             <span>
-                Chekni <a class="font-bold" href="https://t.me/astron_corp">@astron_corp</a> ga yuboring.
+                Chekni <a class="font-bold text-blue-500" href="https://t.me/astron_corp">@astron_corp</a> ga yuboring.
             </span>
         </div>
     </div>
