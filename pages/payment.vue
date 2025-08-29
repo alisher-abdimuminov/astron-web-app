@@ -30,7 +30,7 @@ onMounted(() => {
             <div class="border rounded-full p-1" @click="router.back()">
                 <LucideChevronLeft />
             </div>
-            <p>Fayllar</p>
+            <p>Balansni to'ldirish</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col items-center justify-center gap-2 p-5">
             <p class="text-lg font-bold">PayMe orqali to'lov qilish:</p>
