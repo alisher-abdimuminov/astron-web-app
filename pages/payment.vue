@@ -4,10 +4,9 @@ import { useMiniApp } from 'vue-tg';
 
 
 const router = useRouter();
+const miniApp = useMiniApp();
 
 const userStore = useUserStore();
-
-const { id } = storeToRefs(userStore);
 
 
 const isLoading = ref(true);
@@ -36,7 +35,7 @@ onMounted(() => {
             <div class="bg-transparent dark:bg-primary w-1/2 h-18 rounded-md" @click="navigateTo('https://payme.uz/fallback/merchant/?id=6694e98072bc9a1487f1c636', { open: { target: '_blank' }, external: true })">
                 <img src="/assets/images/payme.png" alt="">
             </div>
-            <p class="font-bold">ID: {{ id }}</p>
+            <p class="font-bold">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
             <Separator />
             <p class="text-xl font-bold">Karta orqali to'lov qilish:</p>
             <span class="font-bold font-mono">9860 0101 3465 0976</span>
