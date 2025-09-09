@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus } from 'lucide-vue-next';
+import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus, LucideBell } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 
 
@@ -11,6 +11,8 @@ const { token, id, balance } = storeToRefs(userStore);
 const newFile = ref(false);
 
 const isLoading = ref(true);
+const announcement = ref("");
+const created = ref("");
 
 miniApp.ready();
 
@@ -49,7 +51,7 @@ const login = async () => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects", "is-telegram"],
 });
 
 useSeoMeta({
@@ -57,9 +59,21 @@ useSeoMeta({
 });
 
 
-onMounted(() => {
+onMounted(async() => {
+    let date = new Date();
+    let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+    let month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+    let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
     login();
     isLoading.value = false;
+    let response = await $fetch<{ count: number }>(`https://astronapi.pythonanywhere.com/counter/${day}-${month}-${year}/`, {
+        method: "POST",
+    });
+
+    let response2 = await $fetch<{ content: string, created: string }>("https://astronapi.pythonanywhere.com/announcement/");
+    announcement.value = response2.content;
+    created.value = response2.created;
+
 });
 
 </script>
@@ -73,7 +87,7 @@ onMounted(() => {
             <p class="text-lg">Salom {{ user }}</p>
             <p class="text-3xl">Astronga xush kelibsiz!</p>
             <p class="text-lg">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
-            <p class="text-lg">Balans: {{ balance }}</p>
+            <p class="text-lg">Balans: {{ new Intl.NumberFormat("uz-Uz").format(parseInt(balance)) }}</p>
         </div>
         <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
             <div class="bg-accent/30 rounded-md divide-y">
@@ -107,7 +121,7 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div class="flex justify-between p-3" @click="navigateTo('https://payme.uz/fallback/merchant/?id=6694e98072bc9a1487f1c636', { external: true, open: { target: '_blank' } })">
+                <div class="flex justify-between p-3" @click="navigateTo({ name: 'payment' })">
                     <div class="flex items-center gap-2">
                         <LucideWallet :size="20" />
                         <p>Balansni to'ldirish</p>
@@ -116,6 +130,12 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
+            </div>
+            <div v-if="announcement" class="bg-orange-500/10 border border-orange-500 rounded-md p-3 flex items-center gap-2">
+                <div class="p-2">
+                    <LucideBell class="text-orange-500 animate-bounce" />
+                </div>
+                <div v-html="announcement"></div>
             </div>
         </div>
     </div>
