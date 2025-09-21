@@ -30,12 +30,12 @@ onMounted(() => {
             </div>
             <p>Balansni to'ldirish</p>
         </div>
-        <div class="h-[calc(100%-3rem)] flex flex-col items-center justify-center gap-2 p-5">
+        <div class="h-[calc(100%-3rem)] flex flex-col items-center justify-start gap-2 p-5">
             <!-- <p class="text-lg font-bold">Payme orqali to'lov qilish:</p>
             <div class="bg-transparent dark:bg-primary w-1/2 h-18 rounded-md" @click="navigateTo('https://payme.uz/fallback/merchant/?id=6694e98072bc9a1487f1c636', { open: { target: '_blank' }, external: true })">
                 <img src="/assets/images/payme.png" alt="">
             </div> -->
-            <p class="font-bold">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
+            <p class="font-bold mt-20">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
             <Separator />
             <p class="text-xl font-bold">Karta orqali to'lov qilish:</p>
             <span class="font-bold font-mono">9860 0101 3465 0976</span>
