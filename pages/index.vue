@@ -15,6 +15,7 @@ const isLoading = ref(true);
 const announcement = ref("");
 const created = ref("");
 const status = ref("");
+const isWaiting = ref(true);
 
 miniApp.ready();
 
@@ -67,6 +68,7 @@ onMounted(async () => {
 
     let response1 = await $fetch<{ status: "success" | "error", "code": string, data: string }>(`https://bot.astron.uz/is-chat-member/?user_id=${miniApp.initDataUnsafe.user?.id}&chat_id=@tarix_repetitor_astron`);
     status.value = response1.data;
+    isWaiting.value = false;
 
 
     let response = await $fetch<{ content: string, created: string }>("https://backend.astron.uz/api/v1/announcement/");
@@ -78,7 +80,10 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
+    <div v-if="isLoading" class="h-screen w-full flex items-center justify-center">
+        <LucideLoader class="animate-spin" />
+    </div>
+    <div v-else class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div v-if="status != 'member' && status != 'administrator' && status != 'creator'"
             class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
             <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
@@ -149,8 +154,5 @@ onMounted(async () => {
                 <div v-html="announcement"></div>
             </div>
         </div>
-    </div>
-    <div v-else class="h-screen w-full flex items-center justify-center">
-        <LucideLoader class="animate-spin" />
     </div>
 </template>
