@@ -79,7 +79,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div v-if="status != 'member' && status != 'admin'"
+    <div v-if="status != 'member' && status != 'administrator' && status != 'creator'"
         class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
         <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
             <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.</p>
