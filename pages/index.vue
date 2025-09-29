@@ -82,15 +82,16 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div v-if="!isWaiting && status != 'member' && status != 'administrator' && status != 'creator'"
-        class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
-        <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
-            <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.</p>
-            <NuxtLink class="w-full" :class="buttonVariants({ variant: 'default' })"
-                to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
-        </div>
-    </div>
     <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
+        <div v-if="status != 'member' && status != 'administrator' && status != 'creator'"
+            class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
+            <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
+                <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.</p>
+                <NuxtLink class="w-full" :class="buttonVariants({ variant: 'default' })"
+                    to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
+            </div>
+        </div>
+        
         <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
             <LucideRefreshCw :size="15" @click="login" />
         </div>
