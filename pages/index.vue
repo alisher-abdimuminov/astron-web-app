@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus, LucideBell } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
+import { buttonVariants } from '~/components/ui/button';
 
 
 const miniApp = useMiniApp();
@@ -13,6 +14,7 @@ const newFile = ref(false);
 const isLoading = ref(true);
 const announcement = ref("");
 const created = ref("");
+const status = ref("");
 
 miniApp.ready();
 
@@ -51,7 +53,7 @@ const login = async () => {
 
 
 definePageMeta({
-    middleware: ["get-subjects", "is-telegram"],
+    middleware: ["get-subjects"],
 });
 
 useSeoMeta({
@@ -60,26 +62,28 @@ useSeoMeta({
 
 
 onMounted(async() => {
-    let date = new Date();
-    let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
-    let month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
-    let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
     login();
     isLoading.value = false;
-    let response = await $fetch<{ count: number }>(`https://astronapi.pythonanywhere.com/counter/${day}-${month}-${year}/`, {
-        method: "POST",
-    });
 
-    let response2 = await $fetch<{ content: string, created: string }>("https://astronapi.pythonanywhere.com/announcement/");
-    announcement.value = response2.content;
-    created.value = response2.created;
+    let response1 = await $fetch<{ status: "success" | "error", "code": string, data: string }>(`https://bot.astron.uz/is-chat-member/?user_id=${miniApp.initDataUnsafe.user?.id}&chat_id=@tarix_repetitor_astron`);
+    console.log(response1);
+    status.value = response1.data;
+
+
+    let response = await $fetch<{ content: string, created: string }>("https://backend.astron.uz/api/v1/announcement/");
+    announcement.value = response.content;
+    created.value = response.created;
 
 });
 
 </script>
 
 <template>
-    <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
+    <div v-if="status != 'member'" class="h-screen flex flex-col items-center justify-center px-10">
+        <p>Ilovadan to'liq foydalanish uchun kanalimizga obuna bo'ling.</p>
+        <NuxtLink :class="buttonVariants({ variant: 'default' })" to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
+    </div>
+    <div v-else-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
             <LucideRefreshCw :size="15" @click="login" />
         </div>
