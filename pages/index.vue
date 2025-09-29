@@ -15,6 +15,7 @@ const isLoading = ref(true);
 const announcement = ref("");
 const created = ref("");
 const status = ref("");
+const isWaiting = ref(true);
 
 miniApp.ready();
 
@@ -65,9 +66,11 @@ onMounted(async () => {
     login();
     isLoading.value = false;
 
+    isWaiting.value = true;
     let response1 = await $fetch<{ status: "success" | "error", "code": string, data: string }>(`https://bot.astron.uz/is-chat-member/?user_id=${miniApp.initDataUnsafe.user?.id}&chat_id=@tarix_repetitor_astron`);
     console.log(response1);
     status.value = response1.data;
+    isWaiting.value = false;
 
 
     let response = await $fetch<{ content: string, created: string }>("https://backend.astron.uz/api/v1/announcement/");
@@ -79,7 +82,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div v-if="status != 'member' && status != 'administrator' && status != 'creator'"
+    <div v-if="!isWaiting && status != 'member' && status != 'administrator' && status != 'creator'"
         class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
         <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
             <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.</p>
