@@ -79,7 +79,7 @@ onMounted(async() => {
 </script>
 
 <template>
-    <div v-if="status != 'member'" class="h-screen flex flex-col items-center justify-center px-10">
+    <div v-if="status != 'member' && status != 'admin'" class="h-screen flex flex-col items-center justify-center px-10">
         <p>Ilovadan to'liq foydalanish uchun kanalimizga obuna bo'ling.</p>
         <NuxtLink :class="buttonVariants({ variant: 'default' })" to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
     </div>
