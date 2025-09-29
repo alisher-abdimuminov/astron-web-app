@@ -61,7 +61,7 @@ useSeoMeta({
 });
 
 
-onMounted(async() => {
+onMounted(async () => {
     login();
     isLoading.value = false;
 
@@ -79,73 +79,78 @@ onMounted(async() => {
 </script>
 
 <template>
-    <div v-if="status != 'member' && status != 'admin'" class="h-screen flex flex-col items-center justify-center px-10">
-        <p>Ilovadan to'liq foydalanish uchun kanalimizga obuna bo'ling.</p>
-        <NuxtLink :class="buttonVariants({ variant: 'default' })" to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
+    <div v-if="status != 'member' && status != 'admin'"
+        class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
+        <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
+            <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.</p>
+            <NuxtLink class="w-full" :class="buttonVariants({ variant: 'default' })"
+                to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
+        </div>
     </div>
-    <div v-else>
-        <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
-            <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
-                <LucideRefreshCw :size="15" @click="login" />
-            </div>
-            <div class="h-[12rem] p-5">
-                <p class="text-lg">Salom {{ user }}</p>
-                <p class="text-3xl">Astronga xush kelibsiz!</p>
-                <p class="text-lg">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
-                <p class="text-lg">Balans: {{ new Intl.NumberFormat("uz-Uz").format(parseInt(balance)) }}</p>
-            </div>
-            <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
-                <div class="bg-accent/30 rounded-md divide-y">
-                    <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'quiz' } })">
-                        <div class="flex items-center gap-2">
-                            <LucideMessageCircleQuestion :size="20" />
-                            <p>Savollar</p>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <LucideChevronRight />
-                        </div>
+    <div v-if="!isLoading" class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
+        <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
+            <LucideRefreshCw :size="15" @click="login" />
+        </div>
+        <div class="h-[12rem] p-5">
+            <p class="text-lg">Salom {{ user }}</p>
+            <p class="text-3xl">Astronga xush kelibsiz!</p>
+            <p class="text-lg">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
+            <p class="text-lg">Balans: {{ new Intl.NumberFormat("uz-Uz").format(parseInt(balance)) }}</p>
+        </div>
+        <div class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5">
+            <div class="bg-accent/30 rounded-md divide-y">
+                <div class="flex justify-between p-3"
+                    @click="$router.push({ name: 'subjects', query: { type: 'quiz' } })">
+                    <div class="flex items-center gap-2">
+                        <LucideMessageCircleQuestion :size="20" />
+                        <p>Savollar</p>
                     </div>
-                    <div class="flex justify-between p-3" @click="$router.push({ name: 'subjects', query: { type: 'test' } })">
-                        <div class="flex items-center gap-2">
-                            <LucideListCheck :size="20" />
-                            <p>Testlar</p>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <LucideChevronRight />
-                        </div>
-                    </div>
-                    <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'files' })">
-                        <div class="flex items-center gap-2">
-                            <LucideFile :size="20" />
-                            <p>Fayl market</p>
-                            <div v-if="newFile" class="absolute top-4 right-4">
-                                <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <LucideChevronRight />
-                        </div>
-                    </div>
-                    <div class="flex justify-between p-3" @click="navigateTo({ name: 'payment' })">
-                        <div class="flex items-center gap-2">
-                            <LucideWallet :size="20" />
-                            <p>Balansni to'ldirish</p>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <LucideChevronRight />
-                        </div>
+                    <div class="flex items-center justify-center">
+                        <LucideChevronRight />
                     </div>
                 </div>
-                <div v-if="announcement" class="bg-orange-500/10 border border-orange-500 rounded-md p-3 flex items-center gap-2">
-                    <div class="p-2">
-                        <LucideBell class="text-orange-500 animate-bounce" />
+                <div class="flex justify-between p-3"
+                    @click="$router.push({ name: 'subjects', query: { type: 'test' } })">
+                    <div class="flex items-center gap-2">
+                        <LucideListCheck :size="20" />
+                        <p>Testlar</p>
                     </div>
-                    <div v-html="announcement"></div>
+                    <div class="flex items-center justify-center">
+                        <LucideChevronRight />
+                    </div>
+                </div>
+                <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'files' })">
+                    <div class="flex items-center gap-2">
+                        <LucideFile :size="20" />
+                        <p>Fayl market</p>
+                        <div v-if="newFile" class="absolute top-4 right-4">
+                            <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <LucideChevronRight />
+                    </div>
+                </div>
+                <div class="flex justify-between p-3" @click="navigateTo({ name: 'payment' })">
+                    <div class="flex items-center gap-2">
+                        <LucideWallet :size="20" />
+                        <p>Balansni to'ldirish</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <LucideChevronRight />
+                    </div>
                 </div>
             </div>
+            <div v-if="announcement"
+                class="bg-orange-500/10 border border-orange-500 rounded-md p-3 flex items-center gap-2">
+                <div class="p-2">
+                    <LucideBell class="text-orange-500 animate-bounce" />
+                </div>
+                <div v-html="announcement"></div>
+            </div>
         </div>
-        <div v-else class="h-screen w-full flex items-center justify-center">
-            <LucideLoader class="animate-spin" />
-        </div>
+    </div>
+    <div v-else class="h-screen w-full flex items-center justify-center">
+        <LucideLoader class="animate-spin" />
     </div>
 </template>
