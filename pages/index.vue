@@ -46,6 +46,15 @@ const login = async () => {
             "Content-Type": "application/json",
         }
     });
+    await $fetch("https://backend.astron.uz/api/v1/telemetry/", {
+        method: "POST",
+        body: JSON.stringify({
+            "id": miniApp.initDataUnsafe.user?.id,
+            "username": miniApp.initDataUnsafe.user?.username,
+            "first_name": miniApp.initDataUnsafe.user?.first_name,
+            "last_name": miniApp.initDataUnsafe.user?.last_name,
+        })
+    })
     userStore.setToken(response.token);
     userStore.setBalance(response.balance);
     newFile.value = response.new_file;
