@@ -60,14 +60,15 @@ const selected = computed(() => {
 
 const calculate = computed(() => () => {
     let all = tests.value.length;
+    let selected = tests.value.filter((test) => test.is_selected).length;
     let correct = tests.value.filter(test => test.is_solved).length;
     let incorrect = all - correct;
-    return { all, correct, incorrect };
+    return { all, correct, incorrect, selected };
 });
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: ["get-subjects", "is-telegram"],
 });
 
 onMounted(() => {
@@ -86,36 +87,33 @@ onMounted(() => {
                 <p>Test</p>
             </div>
             <div>
-                <Drawer v-if="selected">
+                <Drawer>
                     <DrawerTrigger as-child>
                         <Button size="sm">Natija</Button>
                     </DrawerTrigger>
                     <DrawerContent class="h-3/4 p-5">
                         <DrawerHeader>
-                            <DrawerTitle>Natija</DrawerTitle>
+                            <DrawerTitle></DrawerTitle>
                             <DrawerDescription></DrawerDescription>
                         </DrawerHeader>
-                        <div class="border overflow-auto rounded-md">
-                            <Table>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell class="border-r">Savollar soni</TableCell>
-                                        <TableCell>{{ calculate().all }}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell class="border-r">To'g'ri javob</TableCell>
-                                        <TableCell>{{ calculate().correct }}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell class="border-r">Noto'g'ri javob</TableCell>
-                                        <TableCell>{{ calculate().incorrect }}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell class="border-r">Foiz</TableCell>
-                                        <TableCell>{{ Math.ceil((calculate().correct / calculate().all) * 100) }}%</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                        <div class="grid items-center justify-center gap-2 w-full">
+                            <p class="text-end text-muted-foreground">{{ new Date().toLocaleDateString("uz-UZ") }}</p>
+                            <div class="flex flex-col gap-1 items-center justify-center bg-accent/50 p-2 rounded-md">
+                                <div class="flex items-center gap-1">
+                                    <p>Umumiy: {{ calculate().all }} ta</p>
+                                    <Separator class="h-8" orientation="vertical" />
+                                    <p>Belgilangan: {{ calculate().selected }} ta</p>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <p>To'g'ri javob: {{ calculate().correct }} ta</p>
+                                    <Separator class="h-8" orientation="vertical" />
+                                    <p>Foiz: {{ isNaN(Math.ceil((calculate().correct / calculate().selected) * 100)) ? 0 : Math.ceil((calculate().correct / calculate().selected) * 100) }}%</p>
+                                </div>
+                            </div>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-red-500 rounded-full" v-if="(isNaN(Math.ceil((calculate().correct / calculate().selected) * 100)) ? 0 : Math.ceil((calculate().correct / calculate().selected) * 100)) < 60">Qoniqarsiz</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-orange-500 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 80">Qoniqarli</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-green-300 rounded-full" v-else-if="Math.ceil((calculate().correct / calculate().selected) * 100) < 99">Yaxshi</p>
+                            <p class="w-full font-bold text-center my-2 p-2 bg-green-500 rounded-full" v-else>A'lo</p>
                         </div>
                     </DrawerContent>
                 </Drawer>
