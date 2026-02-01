@@ -77,7 +77,9 @@ definePageMeta({
 
 
 onMounted(() => {
-    getCourses();
+    setInterval(() => {
+        getCourses();
+    }, 5000);
     isLoading.value = false;
 });
 </script>
@@ -88,7 +90,7 @@ onMounted(() => {
             <div class="border rounded-full p-1" @click="router.back()">
                 <LucideChevronLeft />
             </div>
-            <p>Online kurslar</p>
+            <p>Onlayn kurslar</p>
         </div>
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <div class="bg-accent/30 rounded-md divide-y">
@@ -100,7 +102,7 @@ onMounted(() => {
                         <div class="flex flex-col">
                             <p class="text-lg">{{ course.name }}</p>
                             <Button @click="likeOrDislike(course)" size="xs"
-                                :variant="course.is_liked ? 'liked' : 'ghost'" class="rounded-full">
+                                :variant="course.is_liked ? 'liked' : 'ghost'" class="w-fit rounded-full">
                                 <span>👍</span>
                                 <span>{{ course.likes }}</span>
                             </Button>

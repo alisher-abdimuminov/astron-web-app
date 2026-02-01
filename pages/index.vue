@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus, LucideBell } from 'lucide-vue-next';
+import { LucideChevronRight, LucideMessageCircleQuestion, LucideWallet, LucideMonitor, LucideMoon, LucideSun, LucideFile, LucideLoader, LucideListCheck, LucideRefreshCw, LucideDot, LucideBellPlus, LucideBell, LucideBookCheck } from 'lucide-vue-next';
 import { useMiniApp } from 'vue-tg';
 import { buttonVariants } from '~/components/ui/button';
 
@@ -153,8 +153,8 @@ onMounted(async () => {
                 </div>
                 <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'courses' })">
                     <div class="flex items-center gap-2">
-                        <LucideFile :size="20" />
-                        <p>Online kurslar</p>
+                        <LucideBookCheck :size="20" />
+                        <p>Onlayn kurslar</p>
                         <div v-if="newFile" class="absolute top-4 right-4">
                             <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
                         </div>
