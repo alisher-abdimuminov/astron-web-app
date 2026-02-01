@@ -16,6 +16,7 @@ const router = useRouter();
 const miniApp = useMiniApp();
 
 const userStore = useUserStore();
+let interval: NodeJS.Timeout;
 
 const { token, id, balance } = storeToRefs(userStore);
 
@@ -77,10 +78,16 @@ definePageMeta({
 
 
 onMounted(() => {
-    setInterval(() => {
+    getCourses();
+
+    interval = setInterval(() => {
         getCourses();
-    }, 5000);
+    }, 3000);
     isLoading.value = false;
+});
+
+onUnmounted(() => {
+    clearInterval(interval);
 });
 </script>
 
