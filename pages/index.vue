@@ -151,7 +151,7 @@ onMounted(async () => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'files' })">
+                <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'courses' })">
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
                         <p>Online kurslar</p>
