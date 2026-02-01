@@ -37,7 +37,7 @@ const user = computed(() => {
 const login = async () => {
     // create a new user
     isLoading.value = true;
-    let response = await $fetch<{ success: boolean, token: string, balance: string, new_file: boolean }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
+    let response = await $fetch<{ success: boolean, token: string, balance: string, new_file: boolean; }>(`https://astrontest.uz/mobile-api/api/uz/get-token?tg_id=${miniApp.initDataUnsafe.user?.id}`, {
         method: "POST",
         body: JSON.stringify({
             "chat_id": miniApp.initDataUnsafe.user?.id,
@@ -54,16 +54,19 @@ const login = async () => {
             "first_name": miniApp.initDataUnsafe.user?.first_name,
             "last_name": miniApp.initDataUnsafe.user?.last_name,
         })
-    })
+    });
     userStore.setToken(response.token);
     userStore.setBalance(response.balance);
     newFile.value = response.new_file;
     isLoading.value = false;
-}
+};
 
 
 definePageMeta({
-    middleware: ["get-subjects", "is-telegram"],
+    middleware: [
+        "get-subjects",
+        // "is-telegram"
+    ],
 });
 
 useSeoMeta({
@@ -75,12 +78,12 @@ onMounted(async () => {
     login();
     isLoading.value = false;
 
-    let response1 = await $fetch<{ status: "success" | "error", "code": string, data: string }>(`https://bot.astron.uz/is-chat-member/?user_id=${miniApp.initDataUnsafe.user?.id}&chat_id=@tarix_repetitor_astron`);
+    let response1 = await $fetch<{ status: "success" | "error", "code": string, data: string; }>(`https://bot.astron.uz/is-chat-member/?user_id=${miniApp.initDataUnsafe.user?.id}&chat_id=@tarix_repetitor_astron`);
     status.value = response1.data;
     isWaiting.value = false;
 
 
-    let response = await $fetch<{ content: string, created: string }>("https://backend.astron.uz/api/v1/announcement/");
+    let response = await $fetch<{ content: string, created: string; }>("https://backend.astron.uz/api/v1/announcement/");
     announcement.value = response.content;
     created.value = response.created;
 
@@ -95,13 +98,14 @@ onMounted(async () => {
     <div v-else class="h-screen w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-500">
         <div v-if="!isWaiting">
             <div v-if="status != 'member' && status != 'administrator' && status != 'creator'"
-            class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
-            <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
-                <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.</p>
-                <NuxtLink class="w-full" :class="buttonVariants({ variant: 'default' })"
-                    to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
+                class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10">
+                <div class="border bg-background p-5 rounded-md flex flex-col gap-5">
+                    <p class="text-center text-lg">Ilovadan foydalanish uchun rasmiy Telegram kanalimizga obuna bo'ling.
+                    </p>
+                    <NuxtLink class="w-full" :class="buttonVariants({ variant: 'default' })"
+                        to="https://t.me/tarix_repetitor_astron">Kanalga obuna bo'lish</NuxtLink>
+                </div>
             </div>
-        </div>
         </div>
 
         <div class="fixed top-1 right-1 z-50 flex justify-end p-5">
@@ -139,6 +143,18 @@ onMounted(async () => {
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
                         <p>Fayl market</p>
+                        <div v-if="newFile" class="absolute top-4 right-4">
+                            <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <LucideChevronRight />
+                    </div>
+                </div>
+                <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'files' })">
+                    <div class="flex items-center gap-2">
+                        <LucideFile :size="20" />
+                        <p>Online kurslar</p>
                         <div v-if="newFile" class="absolute top-4 right-4">
                             <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
                         </div>
