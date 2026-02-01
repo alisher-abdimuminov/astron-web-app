@@ -62,7 +62,7 @@ const likeOrDislike = async (course: ICourse) => {
 };
 
 const getCourses = async () => {
-    let response = await $fetch<ICourse[]>(`https://backend.astron.uz/api/v1/course_channels/?user_id=${id.value}`);
+    let response = await $fetch<ICourse[]>(`https://backend.astron.uz/api/v1/course_channels/?user_id=${miniApp.initDataUnsafe.user?.id}`);
 
     courses.value = response;
 };
