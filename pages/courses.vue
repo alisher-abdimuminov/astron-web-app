@@ -48,7 +48,7 @@ const likeOrDislike = async (course: ICourse) => {
     let response = await $fetch("https://backend.astron.uz/api/v1/like_dislike/", {
         method: "post",
         body: JSON.stringify({
-            "user_id": id.value,
+            "user_id": miniApp.initDataUnsafe.user?.id,
             "course_id": course.handle
         })
     });
