@@ -152,7 +152,7 @@ onMounted(() => {
                                             <DialogTitle>Fayl sotib olish</DialogTitle>
                                             <DialogDescription></DialogDescription>
                                         </DialogHeader>
-                                        <p>{{ file.file_name }} - ni sotib olasizmi?</p>
+                                        <p class="text-center">{{ file.file_name }} - ni sotib olasizmi?</p>
                                         <DialogFooter class="gap-2">
                                             <DialogClose>
                                                 <Button :disabled="isLoading" @click="buyFile(file)">
@@ -172,10 +172,11 @@ onMounted(() => {
                                     </DialogTrigger>
                                     <DialogContent class="w-3/4">
                                         <DialogHeader>
-                                            <DialogTitle>Ogohlantirish</DialogTitle>
+                                            <DialogTitle>Eslatma</DialogTitle>
                                             <DialogDescription>Hisobingizda mablag' yetarli emas.</DialogDescription>
                                         </DialogHeader>
-                                        <p>{{ file.file_name }} - ni sotib olish uchun hisobingizni to'ldiring.</p>
+                                        <p class="text-center">{{ file.file_name }} - ni sotib olish uchun hisobingizni
+                                            to'ldiring.</p>
                                     </DialogContent>
                                 </Dialog>
                             </div>
