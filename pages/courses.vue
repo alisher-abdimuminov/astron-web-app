@@ -110,7 +110,7 @@ onUnmounted(() => {
                             <p class="text-lg">{{ course.name }}</p>
                             <Button @click="likeOrDislike(course)" size="xs"
                                 :variant="course.is_liked ? 'liked' : 'ghost'" class="w-fit rounded-full">
-                                <span>👍</span>
+                                <LucideThumbsUp />
                                 <span>{{ course.likes }}</span>
                             </Button>
                         </div>
