@@ -142,7 +142,7 @@ onMounted(async () => {
                 <div class="relative flex justify-between p-3" @click="navigateTo({ name: 'files' })">
                     <div class="flex items-center gap-2">
                         <LucideFile :size="20" />
-                        <p>Fayl market</p>
+                        <p>Qo'llanmalar</p>
                         <div v-if="newFile" class="absolute top-4 right-4">
                             <div class="w-4 h-4 rounded-full animate-ping bg-red-500"></div>
                         </div>
