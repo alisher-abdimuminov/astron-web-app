@@ -105,7 +105,7 @@ onMounted(() => {
                 <div class="border rounded-full p-1" @click="router.back()">
                     <LucideChevronLeft />
                 </div>
-                <p>Test</p>
+                <p>Nazorat testi</p>
             </div>
             <div>
                 <Drawer>
