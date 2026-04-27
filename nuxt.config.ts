@@ -1,8 +1,11 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: { enabled: false },
     modules: ["shadcn-nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
+
+    components: [
+        { path: "components/ui", global: true, extensions: [".vue"] },
+    ],
 
     colorMode: {
         classPrefix: "",
@@ -17,4 +20,9 @@ export default defineNuxtConfig({
         },
     },
     ssr: false,
+
+    shadcn: {
+        prefix: "",
+        componentDir: "components/ui"
+    }
 });

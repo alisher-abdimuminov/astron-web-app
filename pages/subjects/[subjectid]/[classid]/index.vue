@@ -3,11 +3,11 @@ import { LucideChevronLeft, LucideChevronRight } from 'lucide-vue-next';
 
 
 interface IMavzu {
-    mavzu_id: string
-    fan_id: string
-    sinf_id: string
-    mavzu_nomi: string
-    mavzu_status: string
+    mavzu_id: string;
+    fan_id: string;
+    sinf_id: string;
+    mavzu_nomi: string;
+    mavzu_status: string;
 }
 
 
@@ -38,11 +38,14 @@ const getClassess = async () => {
 
     themes.value = response;
     isLoading.value = true;
-}
+};
 
 
 definePageMeta({
-    middleware: ["get-subjects", "is-telegram"],
+    middleware: [
+        "get-subjects",
+        "is-telegram",
+    ],
 });
 
 onMounted(() => {
@@ -63,7 +66,19 @@ onMounted(() => {
             <ScrollArea class="h-full">
                 <br>
                 <div class="bg-accent/30 rounded-md divide-y">
-                    <div v-for="theme in themes" class="flex justify-between p-2" @click="() => { $route.query.type === 'quiz' ? navigateTo({ name: 'subjects-subjectid-classid-themeid-quiz', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) : navigateTo({ name: 'subjects-subjectid-classid-themeid-test', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) }">
+                    <div class="flex justify-between p-2"
+                        @click="navigateTo({ name: 'subjects-subjectid-classid-mixed', params: { subjectid: $route.params.subjectid, classid: $route.params.classid } })">
+                        <div class="flex items-center gap-2">
+                            <p class="">Test</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <LucideChevronRight />
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-accent/30 rounded-md divide-y">
+                    <div v-for="theme in themes" class="flex justify-between p-2"
+                        @click="() => { $route.query.type === 'quiz' ? navigateTo({ name: 'subjects-subjectid-classid-themeid-quiz', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }) : navigateTo({ name: 'subjects-subjectid-classid-themeid-test', params: { subjectid: theme.fan_id, classid: theme.sinf_id, themeid: theme.mavzu_id } }); }">
                         <div class="flex items-center gap-2">
                             <p class="">{{ theme.mavzu_nomi }}</p>
                         </div>

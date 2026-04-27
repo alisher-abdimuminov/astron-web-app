@@ -14,8 +14,8 @@ const isLoading = ref(true);
 
 definePageMeta({
     middleware: [
-        // "is-telegram", 
-        "get-subjects"
+        "is-telegram",
+        "get-subjects",
     ],
 });
 

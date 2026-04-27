@@ -3,12 +3,12 @@ import { LucideChevronLeft, LucideChevronRight, LucideLock, LucideShoppingCart }
 
 
 interface IClass {
-    classes_id: string
-    subject_id: string
-    classes_name: string
-    classes_status: string
-    purchased: boolean
-    price: number
+    classes_id: string;
+    subject_id: string;
+    classes_name: string;
+    classes_status: string;
+    purchased: boolean;
+    price: number;
 }
 
 
@@ -38,7 +38,7 @@ const getClassess = async () => {
 
     classes.value = response;
     isLoading.value = true;
-}
+};
 
 const buyKlass = async (klass: IClass) => {
     let response = await $fetch("https://astrontest.uz/mobile-api/api/uz/buy-class", {
@@ -49,11 +49,14 @@ const buyKlass = async (klass: IClass) => {
         })
     });
     getClassess();
-}
+};
 
 
 definePageMeta({
-    middleware: ["get-subjects", "is-telegram"],
+    middleware: [
+        "is-telegram",
+        "get-subjects",
+    ],
 });
 
 onMounted(() => {
@@ -73,7 +76,8 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <br>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="klass in classes" class="flex justify-between p-2" @click="() => { $route.query.type !== 'test' || klass.purchased ? navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query }) : null }">
+                <div v-for="klass in classes" class="flex justify-between p-2"
+                    @click="() => { $route.query.type !== 'test' || klass.purchased ? navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query }) : null; }">
                     <div class="flex items-center gap-2">
                         <p class="">{{ klass.classes_name }}</p>
                     </div>
@@ -81,7 +85,8 @@ onMounted(() => {
                         <LucideChevronRight v-if="klass.purchased" />
                         <Dialog v-else>
                             <DialogTrigger>
-                                <Button size="xs" :class="klass.price > parseInt(balance) ? 'bg-red-500' : 'bg-green-500'">
+                                <Button size="xs"
+                                    :class="klass.price > parseInt(balance) ? 'bg-red-500' : 'bg-green-500'">
                                     <LucideShoppingCart />
                                     <span>{{ new Intl.NumberFormat("uz-UZ").format(klass.price) }}</span>
                                 </Button>
@@ -92,17 +97,21 @@ onMounted(() => {
                                     <DialogDescription></DialogDescription>
                                 </DialogHeader>
                                 <p class="text-center" v-if="parseInt(balance) >= klass.price">
-                                    <span class="font-bold">"{{ klass.classes_name }}"</span> ni ochish uchun bir martalik to'lov qiling.
+                                    <span class="font-bold">"{{ klass.classes_name }}"</span> ni ochish uchun bir
+                                    martalik to'lov qiling.
                                     <br>
-                                    <span>To'lov summasi: {{ new Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm</span>
+                                    <span>To'lov summasi: {{ new Intl.NumberFormat("uz-UZ").format(klass.price) }}
+                                        so'm</span>
                                 </p>
                                 <p class="text-center" v-else>
                                     Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
-                                    <span>Darslikni ochish uchun bir martalik to'lov summasi: {{ new Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm.</span>
+                                    <span>Darslikni ochish uchun bir martalik to'lov summasi: {{ new
+                                        Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm.</span>
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
-                                        <Button v-if="parseInt(balance) >= klass.price" @click="buyKlass(klass)">Balansdan yechish</Button>
+                                        <Button v-if="parseInt(balance) >= klass.price"
+                                            @click="buyKlass(klass)">Balansdan yechish</Button>
                                     </DialogClose>
                                 </DialogFooter>
                             </DialogContent>

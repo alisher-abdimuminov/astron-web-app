@@ -90,7 +90,7 @@ const buyFile = async (file: IFile) => {
 
 definePageMeta({
     middleware: [
-        // "is-telegram", 
+        "is-telegram",
         "get-subjects"
     ],
 });

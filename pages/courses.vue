@@ -71,7 +71,7 @@ const getCourses = async () => {
 
 definePageMeta({
     middleware: [
-        // "is-telegram", 
+        "is-telegram",
         "get-subjects"
     ],
 });

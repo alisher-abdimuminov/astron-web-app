@@ -17,7 +17,10 @@ const userStore = useUserStore();
 const { token, balance } = storeToRefs(userStore);
 
 definePageMeta({
-    middleware: ["get-subjects", "is-telegram"],
+    middleware: [
+        "is-telegram",
+        "get-subjects",
+    ],
 });
 
 
@@ -31,9 +34,9 @@ const getSubjects = async () => {
             "token": token.value,
         })
     });
-    
+
     subjectsStore.set(response);
-}
+};
 
 
 const buySubject = async (subject: ISubject) => {
@@ -45,7 +48,7 @@ const buySubject = async (subject: ISubject) => {
         })
     });
     getSubjects();
-}
+};
 
 
 onMounted(() => {
@@ -64,7 +67,10 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <br>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-if="route.query.type === 'test'" v-for="subject in subjects.filter(subject => subject.t_status === 1)" class="flex justify-between p-2" @click="() => { navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) }">
+                <div v-if="route.query.type === 'test'"
+                    v-for="subject in subjects.filter(subject => subject.t_status === 1)"
+                    class="flex justify-between p-2"
+                    @click="() => { navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }); }">
                     <div class="flex items-center gap-2">
                         <p class="">{{ subject.subject_name }}</p>
                     </div>
@@ -72,7 +78,9 @@ onMounted(() => {
                         <LucideChevronRight />
                     </div>
                 </div>
-                <div v-else v-for="subject in subjects.filter(subject => subject.q_status === 1)" class="flex justify-between p-2" @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan') }">
+                <div v-else v-for="subject in subjects.filter(subject => subject.q_status === 1)"
+                    class="flex justify-between p-2"
+                    @click="() => { (subject.purchased || route.query.type === 'quiz') ? navigateTo({ name: 'subjects-subjectid', params: { subjectid: subject.subject_id }, query: $route.query }) : console.log('Sotib olinmagan'); }">
                     <div class="flex items-center gap-2">
                         <p class="">{{ subject.subject_name }}</p>
                     </div>
