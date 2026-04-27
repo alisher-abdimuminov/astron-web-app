@@ -20,30 +20,6 @@ interface IQuestion {
     is_solved: boolean;
 }
 
-
-interface IResult {
-    barcha_savollar: number;
-    belgilangan: number;
-    truecount: number;
-    foiz: string;
-    baho: number;
-    test_type: number;
-    savol: {
-        savol_id: string;
-        savol: string;
-        test_file: string;
-        variant: {
-            trueid: string;
-            truev: string;
-        }[],
-        belgilangan: {
-            checked_id: string;
-            checked_variant: string;
-        }[];
-    }[];
-}
-
-
 const route = useRoute();
 const router = useRouter();
 
@@ -72,7 +48,6 @@ const getMixedTests = async () => {
     questions.value = JSON.parse(response);
     questions.value = questions.value.map((test) => ({ ...test, selected: "", is_selected: false, is_solved: false }));
     isLoading.value = true;
-    console.log(questions.value);
 };
 
 

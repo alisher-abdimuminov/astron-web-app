@@ -79,7 +79,8 @@ onMounted(() => {
                 <br>
             </ScrollArea>
         </div>
-        <div class="bg-background flex items-center justify-center gap-2 h-[3rem] p-2 border-t">
+        <div v-if="$route.query.type === 'test'"
+            class="bg-background flex items-center justify-center gap-2 h-[3rem] p-2 border-t">
             <Button variant="outline"
                 @click="navigateTo({ name: 'subjects-subjectid-classid-mixed', params: { subjectid: $route.params.subjectid, classid: $route.params.classid } })">
                 <div class="flex items-center gap-2">
