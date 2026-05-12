@@ -3,12 +3,12 @@ import { LucideChevronLeft, LucideChevronRight, LucideEye, LucideEyeClosed } fro
 
 
 interface IQuiz {
-    course_id: string
-    fan_id: string
-    sinf_id: string
-    mavzu_id: string
-    course_savol: string
-    course_javob: string
+    course_id: string;
+    fan_id: string;
+    sinf_id: string;
+    mavzu_id: string;
+    course_savol: string;
+    course_javob: string;
 }
 
 
@@ -41,7 +41,7 @@ const getQuizzes = async () => {
 
     quizzes.value = JSON.parse(response);
     isLoading.value = true;
-}
+};
 
 
 const getQuiz = computed(() => (index: number = 0) => {
@@ -50,7 +50,10 @@ const getQuiz = computed(() => (index: number = 0) => {
 
 
 definePageMeta({
-    middleware: ["is-telegram", "get-subjects"],
+    middleware: [
+        "is-telegram",
+        "get-subjects",
+    ],
 });
 
 onMounted(() => {
@@ -89,9 +92,15 @@ onMounted(() => {
                 </div>
                 <br>
                 <div class="flex justify-between items-center">
-                    <Button v-if="getQuiz(index-1)" @click="() => { index--; open = false }" size="icon" variant="outline" class="rounded-full"><LucideChevronLeft /></Button>
+                    <Button v-if="getQuiz(index - 1)" @click="() => { index--; open = false; }" size="icon"
+                        variant="outline" class="rounded-full">
+                        <LucideChevronLeft />
+                    </Button>
                     <div v-else></div>
-                    <Button v-if="getQuiz(index+1)" @click="() => { index++; open = false }" size="icon" variant="outline" class="rounded-full"><LucideChevronRight /></Button>
+                    <Button v-if="getQuiz(index + 1)" @click="() => { index++; open = false; }" size="icon"
+                        variant="outline" class="rounded-full">
+                        <LucideChevronRight />
+                    </Button>
                     <div v-else></div>
                 </div>
                 <br>
