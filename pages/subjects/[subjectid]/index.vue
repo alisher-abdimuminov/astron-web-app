@@ -127,6 +127,10 @@ onMounted(() => {
                                 <LucideLockKeyhole />
                             </DialogTrigger>
                             <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Eslatma</DialogTitle>
+                                    <DialogDescription></DialogDescription>
+                                </DialogHeader>
                                 <p class="text-center">
                                     {{ klass.classes_name }} savol-javobini ochish uchun "Testlar" bo'limida ushbu
                                     darslik uchun to'lov qiling!
