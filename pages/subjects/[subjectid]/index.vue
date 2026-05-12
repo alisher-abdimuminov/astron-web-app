@@ -76,13 +76,13 @@ onMounted(() => {
         <div class="h-[calc(100%-3rem)] flex flex-col gap-2 p-5">
             <br>
             <div class="bg-accent/30 rounded-md divide-y">
-                <div v-for="klass in classes" class="flex justify-between p-2"
-                    @click="() => { $route.query.type !== 'test' || klass.purchased ? navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query }) : null; }">
+                <div v-for="klass in classes" class="flex justify-between p-2">
                     <div class="flex items-center gap-2">
                         <p class="">{{ klass.classes_name }} {{ klass.purchased }}</p>
                     </div>
                     <div class="flex items-center justify-center" v-if="$route.query.type === 'test'">
-                        <LucideChevronRight v-if="klass.purchased" />
+                        <LucideChevronRight v-if="klass.purchased"
+                            @click="navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query })" />
                         <Dialog v-else>
                             <DialogTrigger>
                                 <Button size="xs"
@@ -120,7 +120,8 @@ onMounted(() => {
                         </Dialog>
                     </div>
                     <div v-else>
-                        <LucideChevronRight v-if="klass.purchased" />
+                        <LucideChevronRight v-if="klass.purchased"
+                            @click="navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query })" />
                         <Dialog v-else>
                             <DialogTrigger>
                                 <LucideLockKeyhole />
