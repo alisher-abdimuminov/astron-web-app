@@ -41,7 +41,7 @@ const getClassess = async () => {
 };
 
 const buyKlass = async (klass: IClass) => {
-    let response = await $fetch("https://astrontest.uz/mobile-api/api/uz/buy-class", {
+    await $fetch("https://astrontest.uz/mobile-api/api/uz/buy-class", {
         method: "POST",
         body: JSON.stringify({
             "token": token.value,
@@ -79,9 +79,9 @@ onMounted(() => {
                 <div v-for="klass in classes" class="flex justify-between p-2"
                     @click="() => { $route.query.type !== 'test' || klass.purchased ? navigateTo({ name: 'subjects-subjectid-classid', params: { subjectid: klass.subject_id, classid: klass.classes_id }, query: $route.query }) : null; }">
                     <div class="flex items-center gap-2">
-                        <p class="">{{ klass.classes_name }}</p>
+                        <p class="">{{ klass.classes_name }} {{ klass.purchased }}</p>
                     </div>
-                    <div class="flex items-center justify-center" v-if="$route.query.type === 'test'">
+                    <div class="flex items-center justify-center">
                         <LucideChevronRight v-if="klass.purchased" />
                         <Dialog v-else>
                             <DialogTrigger>
@@ -105,8 +105,10 @@ onMounted(() => {
                                 </p>
                                 <p class="text-center" v-else>
                                     Balansingizda yetarli mablag' mavjud emas. Hisobingizni to'ldiring. <br>
-                                    <span>Darslikni ochish uchun bir martalik to'lov summasi: {{ new
-                                        Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm.</span>
+                                    <span>
+                                        Darslikni ochish uchun bir martalik to'lov summasi:
+                                        {{ new Intl.NumberFormat("uz-UZ").format(klass.price) }} so'm.
+                                    </span>
                                 </p>
                                 <DialogFooter class="flex-row-reverse gap-2">
                                     <DialogClose>
@@ -116,9 +118,6 @@ onMounted(() => {
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>
-                    </div>
-                    <div class="flex items-center justify-center" v-else>
-                        <LucideChevronRight />
                     </div>
                 </div>
             </div>
