@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideChevronLeft, LucideChevronRight, LucideLock, LucideShoppingCart } from 'lucide-vue-next';
+import { LucideChevronLeft, LucideChevronRight, LucideLock, LucideLockKeyhole, LucideShoppingCart } from 'lucide-vue-next';
 
 
 interface IClass {
