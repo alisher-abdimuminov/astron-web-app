@@ -78,7 +78,7 @@ onMounted(() => {
             <div class="bg-accent/30 rounded-md divide-y">
                 <div v-for="klass in classes" class="flex justify-between p-2">
                     <div class="flex items-center gap-2">
-                        <p class="">{{ klass.classes_name }} {{ klass.purchased }}</p>
+                        <p class="">{{ klass.classes_name }}</p>
                     </div>
                     <div class="flex items-center justify-center" v-if="$route.query.type === 'test'">
                         <LucideChevronRight v-if="klass.purchased"
@@ -127,7 +127,7 @@ onMounted(() => {
                                 <LucideLockKeyhole />
                             </DialogTrigger>
                             <DialogContent>
-                                <p>
+                                <p class="text-center">
                                     {{ klass.classes_name }} savol-javobini ochish uchun "Testlar" bo'limida ushbu
                                     darslik uchun to'lov qiling!
                                 </p>
