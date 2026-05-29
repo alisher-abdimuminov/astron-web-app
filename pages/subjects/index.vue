@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-    LucideChevronLeft,
-    LucideChevronRight,
-    LucideLock,
-} from "lucide-vue-next";
+import { LucideChevronLeft, LucideChevronRight } from "lucide-vue-next";
 import type { ISubject } from "~/types";
 
 const route = useRoute();
