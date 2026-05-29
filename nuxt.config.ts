@@ -1,11 +1,9 @@
 export default defineNuxtConfig({
-    compatibilityDate: '2024-11-01',
+    compatibilityDate: "2024-11-01",
     devtools: { enabled: false },
     modules: ["shadcn-nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
 
-    components: [
-        { path: "components/ui", global: true, extensions: [".vue"] },
-    ],
+    components: [{ path: "components/ui", global: true, extensions: [".vue"] }],
 
     colorMode: {
         classPrefix: "",
@@ -15,7 +13,12 @@ export default defineNuxtConfig({
     app: {
         head: {
             script: [
-                { src: 'https://telegram.org/js/telegram-web-app.js?56' }
+                { src: "https://telegram.org/js/telegram-web-app.js?56" },
+                {
+                    src: "https://libtl.com/sdk.js",
+                    "data-zone": "11061643",
+                    "data-sdk": "show_11061643",
+                },
             ],
         },
     },
@@ -23,6 +26,6 @@ export default defineNuxtConfig({
 
     shadcn: {
         prefix: "",
-        componentDir: "components/ui"
-    }
+        componentDir: "components/ui",
+    },
 });
