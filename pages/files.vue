@@ -7,7 +7,6 @@ import {
     LucideFiles,
     LucideLoader,
     LucideShoppingCart,
-    Target,
 } from "lucide-vue-next";
 
 interface IFile {
@@ -109,6 +108,37 @@ definePageMeta({
 });
 
 onMounted(() => {
+    if (
+        typeof window !== "undefined" &&
+        typeof window.show_11061643 === "function"
+    ) {
+        window.show_11061643({
+            type: "inApp",
+            inAppSettings: {
+                frequency: 2,
+                capping: 0.5,
+                interval: 30,
+                timeout: 5,
+                everyPage: false,
+            },
+        });
+    } else {
+        window.addEventListener("load", () => {
+            if (typeof window.show_11061643 === "function") {
+                window.show_11061643({
+                    type: "inApp",
+                    inAppSettings: {
+                        frequency: 2,
+                        capping: 0.5,
+                        interval: 30,
+                        timeout: 5,
+                        everyPage: false,
+                    },
+                });
+            }
+        });
+    }
+
     getFiles();
     getPurchasedFiles();
     isLoading.value = false;

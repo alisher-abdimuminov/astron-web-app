@@ -12,7 +12,14 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            script: [{ src: "https://telegram.org/js/telegram-web-app.js?56" }],
+            script: [
+                { src: "https://telegram.org/js/telegram-web-app.js?56" },
+                {
+                    src: "https://libtl.com/sdk.js",
+                    "data-sdk": "show_11061643",
+                    "data-zone": "11061643",
+                },
+            ],
         },
     },
     ssr: false,
