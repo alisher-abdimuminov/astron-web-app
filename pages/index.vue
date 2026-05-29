@@ -91,37 +91,6 @@ useSeoMeta({
 });
 
 onMounted(async () => {
-    if (
-        typeof window !== "undefined" &&
-        typeof window.show_11061643 === "function"
-    ) {
-        window.show_11061643({
-            type: "inApp",
-            inAppSettings: {
-                frequency: 2,
-                capping: 0.1,
-                interval: 30,
-                timeout: 5,
-                everyPage: true,
-            },
-        });
-    } else {
-        window.addEventListener("load", () => {
-            if (typeof window.show_11061643 === "function") {
-                window.show_11061643({
-                    type: "inApp",
-                    inAppSettings: {
-                        frequency: 2,
-                        capping: 0.1,
-                        interval: 30,
-                        timeout: 5,
-                        everyPage: true,
-                    },
-                });
-            }
-        });
-    }
-
     login();
     isLoading.value = false;
 
