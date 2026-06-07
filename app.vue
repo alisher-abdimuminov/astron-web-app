@@ -1,4 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+onMounted(() => {
+    if (window.yaContextCb !== null) {
+        window.yaContextCb.push(() => {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-19395198-2",
+                type: "fullscreen",
+                platform: "touch",
+            });
+        });
+    }
+});
+</script>
 
 <template>
     <div>
