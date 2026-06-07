@@ -12,7 +12,13 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            script: [{ src: "https://telegram.org/js/telegram-web-app.js?56" }],
+            script: [
+                { src: "https://telegram.org/js/telegram-web-app.js?56" },
+                {
+                    src: "https://yandex.ru/ads/system/context.js",
+                    async: true,
+                },
+            ],
         },
     },
     ssr: false,
