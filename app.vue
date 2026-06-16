@@ -1,5 +1,7 @@
 <script setup lang="ts">
 onMounted(() => {
+	window.yaContextCb = window.yaContextCb || [];
+
 	if (
 		window.yaContextCb ||
 		window.yaContextCb !== null ||
