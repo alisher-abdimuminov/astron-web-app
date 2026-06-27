@@ -133,7 +133,7 @@ onUnmounted(() => {
 						to="https://t.me/tarix_repetitor_astron"
 						>Kanalga obuna bo'lish</NuxtLink
 					>
-					<p>
+					<p class="italic text-sm">
 						Eslatma: Kanalga obuna bo'lgandan keyin ilovadan chiqib,
 						qaytadan kiring.
 					</p>
