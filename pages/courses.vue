@@ -5,6 +5,7 @@ import {
 	LucideChevronRight,
 	LucideThumbsUp,
 } from "lucide-vue-next";
+import { buttonVariants } from "~/components/ui/button";
 
 interface ICourse {
 	handle: string;
@@ -20,8 +21,10 @@ const miniApp = useMiniApp();
 const userStore = useUserStore();
 let interval: NodeJS.Timeout;
 
-const courses = ref<ICourse[]>([]);
+const status = ref("");
+const isWaiting = ref(true);
 const isLoading = ref(true);
+const courses = ref<ICourse[]>([]);
 
 const orderedCourses = computed(() => {
 	courses.value.sort((a, b) => b.likes - a.likes);
@@ -82,13 +85,23 @@ definePageMeta({
 	middleware: ["is-telegram", "get-subjects"],
 });
 
-onMounted(() => {
+onMounted(async () => {
 	getCourses();
 
 	interval = setInterval(() => {
 		getCourses();
 	}, 3000);
 	isLoading.value = false;
+
+	let response1 = await $fetch<{
+		status: "success" | "error";
+		code: string;
+		data: string;
+	}>(
+		`https://bot.astron.uz/is-chat-member/?user_id=${miniApp.initDataUnsafe.user?.id}&chat_id=@tarix_repetitor_astron`,
+	);
+	status.value = response1.data;
+	isWaiting.value = false;
 });
 
 onUnmounted(() => {
@@ -98,6 +111,36 @@ onUnmounted(() => {
 
 <template>
 	<div class="h-screen w-full">
+		<div v-if="!isWaiting">
+			<div
+				v-if="
+					status != 'member' &&
+					status != 'administrator' &&
+					status != 'creator'
+				"
+				class="z-50 fixed top-0 left-0 w-full bg-accent/50 h-screen flex flex-col items-center justify-center px-10"
+			>
+				<div
+					class="border bg-background p-5 rounded-md flex flex-col gap-5"
+				>
+					<p class="text-center text-lg">
+						Ilovadan foydalanish uchun rasmiy Telegram kanalimizga
+						obuna bo'ling.
+					</p>
+					<NuxtLink
+						class="w-full"
+						:class="buttonVariants({ variant: 'default' })"
+						to="https://t.me/tarix_repetitor_astron"
+						>Kanalga obuna bo'lish</NuxtLink
+					>
+					<p>
+						Eslatma: Kanalga obuna bo'lgandan keyin ilovadan chiqib,
+						qaytadan kiring.
+					</p>
+				</div>
+			</div>
+		</div>
+
 		<div class="flex items-center gap-2 h-[3rem] p-2 border-b">
 			<div class="border rounded-full p-1" @click="router.back()">
 				<LucideChevronLeft />
