@@ -17,7 +17,6 @@ const miniApp = useMiniApp();
 
 const userStore = useUserStore();
 
-const { token, id, balance } = storeToRefs(userStore);
 const newFile = ref(false);
 
 const isLoading = ref(true);
@@ -155,10 +154,10 @@ onMounted(async () => {
 			<p class="text-lg">Salom {{ user }}</p>
 			<p class="text-3xl">Astronga xush kelibsiz!</p>
 			<p class="text-lg">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
-			<p class="text-lg">
+			<!-- <p class="text-lg">
 				Balans:
 				{{ new Intl.NumberFormat("uz-Uz").format(parseInt(balance)) }}
-			</p>
+			</p> -->
 		</div>
 		<div
 			class="h-[calc(100%-12rem)] flex flex-col gap-2 bg-background border-t rounded-t-3xl p-5"
@@ -175,7 +174,7 @@ onMounted(async () => {
 				>
 					<div class="flex items-center gap-2">
 						<LucideMessageCircleQuestion :size="20" />
-						<p>Savollar</p>
+						<p>Savol-javoblar</p>
 					</div>
 					<div class="flex items-center justify-center">
 						<LucideChevronRight />
@@ -238,7 +237,7 @@ onMounted(async () => {
 				>
 					<div class="flex items-center gap-2">
 						<LucideWallet :size="20" />
-						<p>Balansni to'ldirish</p>
+						<p>Akkount ma'lumotlari</p>
 					</div>
 					<div class="flex items-center justify-center">
 						<LucideChevronRight />
