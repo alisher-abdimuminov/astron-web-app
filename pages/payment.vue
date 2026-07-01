@@ -26,7 +26,7 @@ onMounted(() => {
 			<div class="border rounded-full p-1" @click="router.back()">
 				<LucideChevronLeft />
 			</div>
-			<p>Balansni to'ldirish</p>
+			<p>Akkaunt ma'lumotlari</p>
 		</div>
 		<div
 			class="h-[calc(100%-3rem)] flex flex-col items-center justify-start gap-2 p-5"
@@ -40,44 +40,6 @@ onMounted(() => {
 				{{ new Intl.NumberFormat("uz-Uz").format(parseInt(balance)) }}
 			</p>
 			<p class="font-bold">ID: {{ miniApp.initDataUnsafe.user?.id }}</p>
-
-			<div class="w-full max-w-sm py-2">
-				<div class="relative h-56 mb-6 [perspective:1000px]">
-					<Card
-						:class="
-							cn(
-								'absolute inset-0 w-full h-full p-6 flex flex-col justify-between [backface-visibility:hidden] shadow-xl',
-							)
-						"
-					>
-						<div className="flex justify-between items-start">
-							<div class="w-12 h-8 rounded shadow-md"></div>
-						</div>
-
-						<div className="space-y-4">
-							<div
-								class="text-xl font-mono tracking-wider font-bold"
-							>
-								9860 0101 3465 0976
-							</div>
-
-							<div class="flex justify-between items-end">
-								<div class="flex-1">
-									<div
-										class="text-xs opacity-70 uppercase font-medium"
-									>
-										Card Holder
-									</div>
-									<div class="font-bold text-sm">
-										I. Yo'ldoshev
-									</div>
-								</div>
-								<div class="flex-1 flex justify-end">ஃ</div>
-							</div>
-						</div>
-					</Card>
-				</div>
-			</div>
 
 			<Separator />
 			<p class="text-xl font-bold">Karta orqali to'lov qilish:</p>

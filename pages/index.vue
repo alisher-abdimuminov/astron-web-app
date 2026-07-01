@@ -237,7 +237,7 @@ onMounted(async () => {
 				>
 					<div class="flex items-center gap-2">
 						<LucideWallet :size="20" />
-						<p>Akkount ma'lumotlari</p>
+						<p>Akkaunt ma'lumotlari</p>
 					</div>
 					<div class="flex items-center justify-center">
 						<LucideChevronRight />
