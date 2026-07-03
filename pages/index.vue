@@ -9,6 +9,7 @@ import {
 	LucideRefreshCw,
 	LucideBell,
 	LucideBookCheck,
+	LucideShare,
 } from "lucide-vue-next";
 import { useMiniApp } from "vue-tg";
 import { buttonVariants } from "~/components/ui/button";
@@ -238,6 +239,24 @@ onMounted(async () => {
 					<div class="flex items-center gap-2">
 						<LucideWallet :size="20" />
 						<p>Akkaunt ma'lumotlari</p>
+					</div>
+					<div class="flex items-center justify-center">
+						<LucideChevronRight />
+					</div>
+				</div>
+
+				<div
+					class="flex justify-between p-3"
+					@click="
+						navigateTo(
+							'https://t.me/share?url=https://t.me/astrontest_bot',
+							{ external: true },
+						)
+					"
+				>
+					<div class="flex items-center gap-2">
+						<LucideShare :size="20" />
+						<p>Ilovani ulashish</p>
 					</div>
 					<div class="flex items-center justify-center">
 						<LucideChevronRight />
