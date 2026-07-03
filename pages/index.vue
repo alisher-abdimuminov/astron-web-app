@@ -105,6 +105,18 @@ onMounted(async () => {
 	announcement.value = response.content;
 	created.value = response.created;
 });
+
+const shareApp = () => {
+	const shareUrl = "https://t.me/astrontest_bot";
+
+	const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}`;
+
+	if (window.Telegram?.WebApp) {
+		window.Telegram.WebApp.openTelegramLink(tgUrl);
+	} else {
+		window.open(tgUrl, "_blank");
+	}
+};
 </script>
 
 <template>
@@ -245,15 +257,7 @@ onMounted(async () => {
 					</div>
 				</div>
 
-				<div
-					class="flex justify-between p-3"
-					@click="
-						navigateTo(
-							'https://t.me/share?url=https://t.me/astrontest_bot',
-							{ external: true },
-						)
-					"
-				>
+				<div class="flex justify-between p-3" @click="shareApp">
 					<div class="flex items-center gap-2">
 						<LucideShare :size="20" />
 						<p>Ilovani ulashish</p>
