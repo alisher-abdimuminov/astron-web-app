@@ -12,7 +12,6 @@ import {
 	LucideShare,
 } from "lucide-vue-next";
 import { useMiniApp } from "vue-tg";
-import { buttonVariants } from "~/components/ui/button";
 
 const miniApp = useMiniApp();
 
@@ -227,7 +226,7 @@ const shareApp = () => {
 						<LucideChevronRight />
 					</div>
 				</div>
-				<div
+				<!-- <div
 					class="relative flex justify-between p-3"
 					@click="navigateTo({ name: 'courses' })"
 				>
@@ -243,7 +242,7 @@ const shareApp = () => {
 					<div class="flex items-center justify-center">
 						<LucideChevronRight />
 					</div>
-				</div>
+				</div> -->
 				<div
 					class="flex justify-between p-3"
 					@click="navigateTo({ name: 'payment' })"
