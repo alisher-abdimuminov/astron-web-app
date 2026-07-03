@@ -8,7 +8,6 @@ import {
 	LucideListCheck,
 	LucideRefreshCw,
 	LucideBell,
-	LucideBookCheck,
 	LucideShare,
 } from "lucide-vue-next";
 import { useMiniApp } from "vue-tg";
